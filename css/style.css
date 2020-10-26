@@ -1,0 +1,23 @@
+html,body {
+  height:100%;
+}
+
+.page {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 50px;
+  background-color: yellowgreen;
+  opacity: 0.5;
+  transition: all 700ms ease-in;
+}
+
+.text-show {
+  opacity: 1 !important;
+}
+
+.text-hide {
+  opacity: 0.1;
+  transition: all 500ms ease-in;
+}
