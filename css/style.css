@@ -8,7 +8,7 @@ html,body {
   align-items: center;
   justify-content: center;
   margin: 50px 50px;
-  background-color: yellowgreen;
+  background-color: whitesmoke;
   opacity: 0.5;
   transition: all 700ms ease-in;
 }
