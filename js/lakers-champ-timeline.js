@@ -13,7 +13,7 @@ var svg = d3
   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 // read data
-d3.csv('../files/lakers_champ.csv', data => {
+d3.csv('./files/lakers_champ.csv', data => {
   var years = []
   data.forEach(row => {
     // row['YEARAWARDED'] = +row['YEARAWARDED']
