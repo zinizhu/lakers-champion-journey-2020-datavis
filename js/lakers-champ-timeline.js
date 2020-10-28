@@ -48,7 +48,7 @@ d3.csv('./files/lakers_champ.csv', data => {
     )
   d3.selectAll('.lakers-champ-axis .tick line')
     .attr('y2', (d, i) => {
-      if (d == 2020) return -50
+      if (d == 2020) return -120
       if (i % 2 === 0) {
         return -20
       }
@@ -60,13 +60,16 @@ d3.csv('./files/lakers_champ.csv', data => {
 
   d3.selectAll('.lakers-champ-axis .tick text')
     .attr('y', (d, i) => {
-      if (d == 2020) return -80
+      if (d == 2020) return -160
       if (i % 2 === 0) {
         return -40
       }
       return 30
     })
-    .attr('font-size', '13')
+    .attr('font-size',  function (d) {
+      if (d === 2020) return '20'
+      return '13'
+    })
 
   var ticks = d3.selectAll('.lakers-champ-axis .tick')
   ticks.each(function (tick, i) {
@@ -74,7 +77,7 @@ d3.csv('./files/lakers_champ.csv', data => {
       .append('circle')
       .attr('cy', function (d) {
         console.log(i)
-        if (d == 2020) return -50
+        if (d == 2020) return -120
         if (i % 2 === 0) {
           return -20
         }
