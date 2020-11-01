@@ -1,7 +1,7 @@
 // define margin and svg size
 var margin = { top: 30, bottom: 30, left: 30, right: 30 }
 var width = 1200
-var height = 700
+var height = 500
 
 // create svg
 var svg = d3
@@ -20,13 +20,8 @@ d3.csv('./files/lakers_champ.csv', data => {
     years.push(+row['YEARAWARDED'])
   })
   years.sort()
-  console.log(data)
+  // console.log(data)
 
-  // add x-axis, time scale
-  console.log(
-    d3.min(data, d => d['YEARAWARDED']),
-    d3.max(data, d => d['YEARAWARDED'])
-  )
   var x = d3
     .scaleLinear()
     .domain([
@@ -66,7 +61,7 @@ d3.csv('./files/lakers_champ.csv', data => {
       }
       return 30
     })
-    .attr('font-size',  function (d) {
+    .attr('font-size', function (d) {
       if (d === 2020) return '20'
       return '13'
     })
@@ -76,7 +71,6 @@ d3.csv('./files/lakers_champ.csv', data => {
     d3.select(this)
       .append('circle')
       .attr('cy', function (d) {
-        console.log(i)
         if (d == 2020) return -120
         if (i % 2 === 0) {
           return -20
