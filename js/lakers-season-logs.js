@@ -1,5 +1,5 @@
 // define margin and svg size
-var margin = { top: 30, bottom: 30, left: 30, right: 30 }
+var margin = { top: 40, bottom: 10, left: 30, right: 30 }
 var width = 1000
 var height = 300
 
@@ -21,7 +21,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
   })
 
   data.sort((a, b) => a['GAME_DATE'].localeCompare(b['GAME_DATE']))
-  console.log(data)
+  // console.log(data)
 
   // define linear scales
   var len = data.length
@@ -35,8 +35,6 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .scaleLinear()
     .domain([d3.min(data, d => d.DIFF) * 1.4, d3.max(data, d => d.DIFF) * 1.4])
     .range([height / 2, 0])
-
-  console.log(x.bandwidth())
 
   // on hover
   const highlight = function (d) {

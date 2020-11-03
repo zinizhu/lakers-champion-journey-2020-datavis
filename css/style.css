@@ -23,6 +23,13 @@ html,body {
   transition: all 500ms ease-in;
 }
 
+/* layout */
+.div-inline {
+  display: inline-block;
+  text-align: left;
+  float: left;
+}
+
 /* page 1 */
 #page-1-title {
   height: 50%;
@@ -39,3 +46,4 @@ html,body {
   font-size: 40px;
   margin-bottom: 20px;
 }
+

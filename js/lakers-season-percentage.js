@@ -1,5 +1,5 @@
 // define margin and svg size
-var margin = { top: 30, bottom: 30, left: 30, right: 30 }
+var margin = { top: 30, bottom: 10, left: 30, right: 30 }
 var width = 1000
 var height = 200
 
@@ -21,7 +21,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
   })
 
   data.sort((a, b) => a['GAME_DATE'].localeCompare(b['GAME_DATE']))
-  console.log(data)
+  // console.log(data)
 
   // define linear scales
   var len = data.length
@@ -36,24 +36,6 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .domain([0, 1])
     .range([height, 0])
 
-  console.log(x.bandwidth())
-
-  // on hover
-  // const highlight = function (d) {
-  //   var rectClass = '.season-log-' + d.GAME_ID
-  //   var textClass = '.season-log-text-' + d.GAME_ID
-  //   var color = d.DIFF < 0 ? COLOR.LAKERS_BLACK : COLOR.ORANGE
-  //   d3.selectAll(rectClass).style('fill', color)
-  //   d3.selectAll(textClass).style('display', 'block')
-  // }
-
-  // const doNotHighlight = function (d) {
-  //   var rectClass = '.season-log-' + d.GAME_ID
-  //   var textClass = '.season-log-text-' + d.GAME_ID
-  //   var color = d.DIFF < 0 ? COLOR.DARK_GREY : COLOR.LAKERS_YELLOW
-  //   d3.selectAll(rectClass).style('fill', color)
-  //   d3.selectAll(textClass).style('display', 'none')
-  // }
   seasonPercentage
     .append('path')
     .datum(data) // .data vs .datum: former allows multiple append, later allows 1
