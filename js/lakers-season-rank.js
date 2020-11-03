@@ -13,7 +13,6 @@ var seasonPTSRank = d3
   .attr('transform', 'translate(' + lakers_season_pts_rank_margin.left + ',' + lakers_season_pts_rank_margin.top + ')')
 
 d3.csv("./files/all_team_performance.csv", data => {
-  console.log(data)
 
   all_team_PTS = []
   data.forEach(row => {
@@ -21,7 +20,7 @@ d3.csv("./files/all_team_performance.csv", data => {
     all_team_PTS.push({"team": row["TEAM_ABBR"], "PTS": +team_avg_pts.toFixed(2)})
   });
   all_team_PTS.sort((a, b) => b.PTS - a.PTS)
-  console.log(all_team_PTS)
+  // console.log(all_team_PTS)
 
   // horizontal bar graph
   // y axis

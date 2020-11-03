@@ -18,7 +18,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
   data.forEach(row => {
     lakersAllGames.push({'wl': row.WL, 'PTS': +row.PTS, id: row.GAME_ID})
   });
-  console.log(lakersAllGames)
+  // console.log(lakersAllGames)
 
   // axis
   var seasonPTSDots_random = d3.randomUniform(30, season_dots_width - 30)
