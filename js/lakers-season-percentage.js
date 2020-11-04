@@ -113,7 +113,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
 
   seasonPercentage
     .append('text')
-    .attr('x', x(data.length - 1) + 5)
-    .attr('y', y(data[data.length - 1].FG3_PCT) + 5)
+    .attr('x', x(data.length - 1) - 2)
+    .attr('y', y(data[data.length - 1].FG3_PCT) + 20)
     .text('FG3%')
 })

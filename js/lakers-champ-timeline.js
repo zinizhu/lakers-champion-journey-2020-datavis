@@ -1,7 +1,7 @@
 // define margin and svg size
-var margin = { top: 200, bottom: 30, left: 30, right: 30 }
+var margin = { top: 100, bottom: 30, left: 30, right: 30 }
 var width = 1300
-var height = 500
+var height = 200
 
 // create svg
 var svg = d3

@@ -222,32 +222,32 @@ d3.csv('./files/lakers_players_performance.csv', data => {
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 280)
+    .attr('x', 290)
     .attr('y', 5)
     .text('REB: ')
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 360)
+    .attr('x', 370)
     .attr('y', 5)
     .text('AST: ')
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 440)
+    .attr('x', 450)
     .attr('y', 5)
     .text('STL: ')
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 520)
+    .attr('x', 530)
     .attr('y', 5)
     .text('TOV: ')
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-name')
-    .attr('x', 20)
+    .attr('x', 23)
     .attr('y', 5)
     .text('-.-')
 
@@ -255,35 +255,35 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .append('text')
     .attr('class', 'lakers-players-summary-PTS')
     .attr('x', 240)
-    .attr('y', 5)
+    .attr('y', 4.5)
     .text('-.-')
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-REB')
-    .attr('x', 320)
-    .attr('y', 5)
+    .attr('x', 330)
+    .attr('y', 4.5)
     .text('-.-')
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-AST')
-    .attr('x', 400)
-    .attr('y', 5)
+    .attr('x', 405)
+    .attr('y', 4.5)
     .text('-.-')
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-STL')
-    .attr('x', 480)
-    .attr('y', 5)
+    .attr('x', 485)
+    .attr('y', 4.5)
     .text('-.-')
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-TOV')
-    .attr('x', 560)
-    .attr('y', 5)
+    .attr('x', 570)
+    .attr('y', 4.5)
     .text('-.-')
 
   // add legends
