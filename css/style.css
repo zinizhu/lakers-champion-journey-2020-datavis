@@ -7,11 +7,11 @@ html,body {
   height: 70%;
   display: block;
   text-align: center;
-  margin: 50px 50px;
+  margin: 30px 30px;
   padding: 5%;
   background-color: whitesmoke;
-  opacity: 0.5;
-  transition: all 700ms ease-in;
+  opacity: 0.1;
+  transition: all 1000ms ease-in;
 }
 
 .text-show {
@@ -28,6 +28,10 @@ html,body {
   display: inline-block;
   text-align: left;
   float: left;
+}
+
+.left-space {
+  margin-left: 100px;
 }
 
 /* page 1 */

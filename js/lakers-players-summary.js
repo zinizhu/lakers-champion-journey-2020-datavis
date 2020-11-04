@@ -167,7 +167,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     var stlClass = '.lakers-players-summary-STL'
     var tovClass = '.lakers-players-summary-TOV'
 
-    d3.selectAll(pathClass).style('stroke-width', '2.5px')
+    d3.selectAll(pathClass).style('stroke-width', '3px').style('opacity', '1')
     d3.selectAll(playerClass).text(d.name)
     d3.selectAll(ptsClass).text(d.PTS)
     d3.selectAll(rebClass).text(d.REB)
@@ -178,7 +178,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
 
   const lakers_players_summary_doNotHighlight = function (d) {
     var pathClass = '.lakers-players-summary-' + d.name.split(' ')[0]
-    d3.selectAll(pathClass).style('stroke-width', '1px')
+    d3.selectAll(pathClass).style('stroke-width', '1px').style('opacity', '0.6')
   }
 
   // draw path
@@ -190,6 +190,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .attr('class', d => 'lakers-players-summary-' + d.name.split(' ')[0])
     .attr('d', path)
     .style('fill', 'none')
+    .style('opacity', '0.6')
     .style('stroke', d => {
       if (first_team.includes(d.name)) {
         return lakers_players_performance_colors[0]
@@ -208,83 +209,82 @@ d3.csv('./files/lakers_players_performance.csv', data => {
 
   // add hovering text
   seasonPlayersSummary
-    .append("text")
-    .attr("x", -30)
-    .attr("y", 5)
-    .text("Player: ")
-  
+    .append('text')
+    .attr('x', -30)
+    .attr('y', 5)
+    .text('Player: ')
+
   seasonPlayersSummary
-    .append("text")
-    .attr("x", 200)
-    .attr("y", 5)
-    .text("PTS: ")
+    .append('text')
+    .attr('x', 200)
+    .attr('y', 5)
+    .text('PTS: ')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("x", 280)
-    .attr("y", 5)
-    .text("REB: ")
+  seasonPlayersSummary
+    .append('text')
+    .attr('x', 280)
+    .attr('y', 5)
+    .text('REB: ')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("x", 360)
-    .attr("y", 5)
-    .text("AST: ")
+  seasonPlayersSummary
+    .append('text')
+    .attr('x', 360)
+    .attr('y', 5)
+    .text('AST: ')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("x", 440)
-    .attr("y", 5)
-    .text("STL: ")
+  seasonPlayersSummary
+    .append('text')
+    .attr('x', 440)
+    .attr('y', 5)
+    .text('STL: ')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("x", 520)
-    .attr("y", 5)
-    .text("TOV: ")
+  seasonPlayersSummary
+    .append('text')
+    .attr('x', 520)
+    .attr('y', 5)
+    .text('TOV: ')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-name")
-    .attr("x", 20)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-name')
+    .attr('x', 20)
+    .attr('y', 5)
+    .text('-.-')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-PTS")
-    .attr("x", 240)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-PTS')
+    .attr('x', 240)
+    .attr('y', 5)
+    .text('-.-')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-REB")
-    .attr("x", 320)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-REB')
+    .attr('x', 320)
+    .attr('y', 5)
+    .text('-.-')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-AST")
-    .attr("x", 400)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-AST')
+    .attr('x', 400)
+    .attr('y', 5)
+    .text('-.-')
 
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-STL")
-    .attr("x", 480)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-STL')
+    .attr('x', 480)
+    .attr('y', 5)
+    .text('-.-')
 
-
-    seasonPlayersSummary
-    .append("text")
-    .attr("class", "lakers-players-summary-TOV")
-    .attr("x", 560)
-    .attr("y", 5)
-    .text("-.-")
+  seasonPlayersSummary
+    .append('text')
+    .attr('class', 'lakers-players-summary-TOV')
+    .attr('x', 560)
+    .attr('y', 5)
+    .text('-.-')
 
   // add legends
   var lakers_players_legends = seasonPlayersSummary

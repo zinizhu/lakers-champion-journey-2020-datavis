@@ -8,6 +8,6 @@ const COLOR = {
   LIGHT_GREY: '#d4d4d4',
   ORANGE: '#ff9100',
   RED: '#fd2727',
-  GREEN: '#3bcc62',
-  BLUE: '#42c9db'
+  GREEN: '#2fa62b',
+  BLUE: '#276bfd'
 }

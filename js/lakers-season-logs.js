@@ -1,16 +1,25 @@
 // define margin and svg size
-var margin = { top: 40, bottom: 10, left: 30, right: 30 }
-var width = 1000
-var height = 300
+var season_logs_margin = { top: 20, bottom: 10, left: 30, right: 30 }
+var season_logs_width = 1000
+var season_logs_height = 200
 
 // create svg
 var seasonLogs = d3
   .select('#lakers-season-logs')
   .append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
+  .attr(
+    'width',
+    season_logs_width + season_logs_margin.left + season_logs_margin.right
+  )
+  .attr(
+    'height',
+    season_logs_height + season_logs_margin.top + season_logs_margin.bottom
+  )
   .append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  .attr(
+    'transform',
+    'translate(' + season_logs_margin.left + ',' + season_logs_margin.top + ')'
+  )
 
 // read data
 d3.csv('./files/lakers_game_logs.csv', data => {
@@ -28,13 +37,13 @@ d3.csv('./files/lakers_game_logs.csv', data => {
   var x = d3
     .scaleBand()
     .domain(d3.range(len))
-    .range([0, width])
+    .range([0, season_logs_width])
     .padding(0.1)
 
   var y = d3
     .scaleLinear()
     .domain([d3.min(data, d => d.DIFF) * 1.4, d3.max(data, d => d.DIFF) * 1.4])
-    .range([height / 2, 0])
+    .range([season_logs_height - 50, 0])
 
   // on hover
   const highlight = function (d) {
@@ -106,7 +115,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
       if (d.DIFF < 0) {
         return y(d.DIFF) + 20
       }
-      return y(d.DIFF) - 20
+      return y(d.DIFF) - 8
     })
   // .style('display', 'none')
 

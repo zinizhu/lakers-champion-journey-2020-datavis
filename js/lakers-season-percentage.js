@@ -1,16 +1,33 @@
 // define margin and svg size
-var margin = { top: 30, bottom: 10, left: 30, right: 30 }
-var width = 1000
-var height = 200
+var season_percentage_margin = { top: 30, bottom: 10, left: 30, right: 30 }
+var season_percentage_width = 1000
+var season_percentage_height = 120
 
 // create svg
 var seasonPercentage = d3
   .select('#lakers-season-percentage')
   .append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
+  .attr(
+    'width',
+    season_percentage_width +
+      season_percentage_margin.left +
+      season_percentage_margin.right
+  )
+  .attr(
+    'height',
+    season_percentage_height +
+      season_percentage_margin.top +
+      season_percentage_margin.bottom
+  )
   .append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  .attr(
+    'transform',
+    'translate(' +
+      season_percentage_margin.left +
+      ',' +
+      season_percentage_margin.top +
+      ')'
+  )
 
 // read data
 d3.csv('./files/lakers_game_logs.csv', data => {
@@ -28,13 +45,13 @@ d3.csv('./files/lakers_game_logs.csv', data => {
   var x = d3
     .scaleBand()
     .domain(d3.range(len))
-    .range([0, width])
+    .range([0, season_percentage_width])
     .padding(0.1)
 
   var y = d3
     .scaleLinear()
     .domain([0, 1])
-    .range([height, 0])
+    .range([season_percentage_height, 0])
 
   seasonPercentage
     .append('path')
