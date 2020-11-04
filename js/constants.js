@@ -7,5 +7,7 @@ const COLOR = {
   DARK_GREY: '#787878',
   LIGHT_GREY: '#d4d4d4',
   ORANGE: '#ff9100',
-  RED: '#fd2727'
+  RED: '#fd2727',
+  GREEN: '#3bcc62',
+  BLUE: '#42c9db'
 }
