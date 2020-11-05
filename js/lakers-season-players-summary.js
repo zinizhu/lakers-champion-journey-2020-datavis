@@ -1,6 +1,6 @@
 // define margin and svg size
-var season_summary_margin = { top: 30, bottom: 20, left: 100, right: 10 }
-var season_summary_width = 700
+var season_summary_margin = { top: 30, bottom: 20, left: 50, right: 10 }
+var season_summary_width = 400 // 700
 var season_summary_height = 380
 
 // create svg
@@ -45,7 +45,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     player_names.push(row.PLAYER_NAME)
   })
 
-  console.log(lakers_players_performance)
+  // console.log(lakers_players_performance)
 
   // hardcode colors.
   first_team = [
@@ -102,7 +102,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
       )
     )
   }
-  console.log(metricsMinValues, metricsMaxValues)
+  // console.log(metricsMinValues, metricsMaxValues)
 
   // for each dimension build a linear scale
   var lakers_players_performance_y = {}
