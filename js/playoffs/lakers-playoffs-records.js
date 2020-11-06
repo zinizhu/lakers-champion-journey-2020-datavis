@@ -3,6 +3,9 @@ var playoffs_records_margin = { top: 10, bottom: 10, left: 10, right: 10 }
 var playoffs_records_width = 540
 var playoffs_records_height = 900
 
+var playoffs_current_selected_round = 0
+var playoffs_current_selected_game = 0
+
 // create svg
 var playoffs_records = d3
   .select('#lakers-playoffs-records')
@@ -30,12 +33,10 @@ var playoffs_records = d3
   )
 
 var lakers_playoffs_games = []
+var playoffs_oppo_abbr = ['POR', 'HOU', 'DEN', 'MIA']
 
 d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
   d3.csv('./files/lakers_playoffs_opp_logs.csv', data2 => {
-    console.log(data)
-    console.log(data2)
-
     // divide the data into 4 rounds
     var playoffs_oppo_teams_title = [
       'Round 1  vs Portland Trail Blazers',
@@ -117,6 +118,11 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .data(playoffs_games_arr[idx])
         .enter()
         .append('circle')
+        .attr(
+          'class',
+          (d, i) =>
+            'playoffs-round-circle playoffs-round-circle-' + idx + '-' + i
+        )
         .attr('cx', (d, i) => playoffs_games_x(i))
         .attr('cy', (d, i) => playoffs_games_y(+d['index']))
         .attr('r', 14)
@@ -130,6 +136,21 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
     }
 
     function selectGame (idx, i) {
+      playoffs_current_selected_round = idx
+      playoffs_current_selected_game = i
+
+      // highlight border
+      playoffs_records
+        .selectAll('.playoffs-round-circle')
+        .attr('stroke-width', '0px')
+
+      // highlight border
+      playoffs_records
+        .selectAll('.playoffs-round-circle-' + idx + '-' + i)
+        .attr('stroke-width', '4px')
+        .attr('stroke', COLOR.LAKERS_YELLOW)
+        .attr('stroke-opacity', 0.5)
+
       var gamelog = playoffs_games_arr[idx][i]
       var oppGamelog = playoffs_oppo_games_arr[idx][i]
       var gameDetails = []
@@ -187,7 +208,91 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('width', (d, i) => game_details_scales.x_scales_oppo[i](d))
         .attr('height', game_details_scales.y_scale.bandwidth())
         .attr('fill', COLOR.BLUE)
+
+      // update player stats
+      var currentGamePlayersStats =
+        playoffs_players_stats_by_game[playoffs_oppo_abbr[idx]][gamelog.GAME_ID]
+      var currentGamePlayersNames =
+        playoffs_players_names_by_game[playoffs_oppo_abbr[idx]][gamelog.GAME_ID]
+
+      // update select options
+      d3.select('#lakers-playoffs-players-button')
+        .selectAll('.playoffs-players-option')
+        .remove()
+
+      d3.select('#lakers-playoffs-players-button')
+        .selectAll('option')
+        .data(currentGamePlayersNames)
+        .enter()
+        .append('option')
+        .attr('class', 'playoffs-players-option')
+        .text(d => d)
+        .attr('value', d => d)
+
+      // playername
+      var selected_player_name = d3
+        .select('#lakers-playoffs-players-button')
+        .property('value')
+
+      var selected_player = currentGamePlayersStats.filter(
+        d => d.name === selected_player_name
+      )
+      var selected_player_arr = selected_player[0].log
+
+      playoffs_players.selectAll('.playoffs-player-stats-path').remove()
+      playoffs_players
+        .append('path')
+        .datum(selected_player_arr) // .data vs .datum: former allows multiple append, later allows 1
+        .attr('class', 'playoffs-player-stats-path')
+        .attr('stroke', COLOR.LAKERS_YELLOW)
+        .attr('stroke-width', 2)
+        .attr('fill', COLOR.LAKERS_YELLOW)
+        .attr('fill-opacity', 0.3)
+        .attr(
+          'd',
+          d3
+            .line()
+            .x(d => d.x)
+            .y(d => d.y)
+        )
     }
+
+    d3.select('#lakers-playoffs-players-button').on('change', function (d) {
+      // recover the option that has been chosen
+      var selected_player_name = d3.select(this).property('value')
+
+      var gamelog =
+        playoffs_games_arr[playoffs_current_selected_round][
+          playoffs_current_selected_game
+        ]
+
+      var currentGamePlayersStats =
+        playoffs_players_stats_by_game[
+          playoffs_oppo_abbr[playoffs_current_selected_round]
+        ][gamelog.GAME_ID]
+
+      var selected_player = currentGamePlayersStats.filter(
+        d => d.name === selected_player_name
+      )
+      var selected_player_arr = selected_player[0].log
+
+      playoffs_players.selectAll('.playoffs-player-stats-path').remove()
+      playoffs_players
+        .append('path')
+        .datum(selected_player_arr) // .data vs .datum: former allows multiple append, later allows 1
+        .attr('class', 'playoffs-player-stats-path')
+        .attr('stroke', COLOR.LAKERS_YELLOW)
+        .attr('stroke-width', 2)
+        .attr('fill', COLOR.LAKERS_YELLOW)
+        .attr('fill-opacity', 0.3)
+        .attr(
+          'd',
+          d3
+            .line()
+            .x(d => d.x)
+            .y(d => d.y)
+        )
+    })
 
     selectGame(0, 0)
   })
