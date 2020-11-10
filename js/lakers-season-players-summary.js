@@ -1,6 +1,6 @@
 // define margin and svg size
 var season_summary_margin = { top: 30, bottom: 20, left: 50, right: 10 }
-var season_summary_width = 400 // 700
+var season_summary_width = 700
 var season_summary_height = 380
 
 // create svg

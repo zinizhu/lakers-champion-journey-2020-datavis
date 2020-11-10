@@ -139,18 +139,6 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
       playoffs_current_selected_round = idx
       playoffs_current_selected_game = i
 
-      // highlight border
-      playoffs_records
-        .selectAll('.playoffs-round-circle')
-        .attr('stroke-width', '0px')
-
-      // highlight border
-      playoffs_records
-        .selectAll('.playoffs-round-circle-' + idx + '-' + i)
-        .attr('stroke-width', '4px')
-        .attr('stroke', COLOR.LAKERS_YELLOW)
-        .attr('stroke-opacity', 0.5)
-
       var gamelog = playoffs_games_arr[idx][i]
       var oppGamelog = playoffs_oppo_games_arr[idx][i]
       var gameDetails = []
@@ -161,6 +149,19 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
       for (var j = 0; j < playoffs_details_game_stats.length; j++) {
         oppoGameDetails.push(oppGamelog[playoffs_details_game_stats[j]])
       }
+
+      // highlight border
+      playoffs_records
+        .selectAll('.playoffs-round-circle')
+        .attr('stroke-width', '0px')
+
+      // highlight border
+      playoffs_records
+        .selectAll('.playoffs-round-circle-' + idx + '-' + i)
+        .attr('stroke-width', '10px')
+        .attr('stroke', COLOR.LAKERS_YELLOW)
+        .attr('stroke-opacity', 0.5)
+
 
       playoffs_deatails.selectAll('.playoffs-game-details').remove()
       playoffs_deatails_oppo.selectAll('.playoffs-oppo-game-details').remove()

@@ -1,5 +1,6 @@
 html,body {
   height:100%;
+  width: 1800px;
   font-family: Helvetica;
 }
 
@@ -9,7 +10,7 @@ html,body {
   text-align: center;
   margin: 30px 30px;
   padding: 5%;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   opacity: 0.1;
   transition: all 1000ms ease-in;
 }
@@ -24,10 +25,21 @@ html,body {
 }
 
 /* layout */
+.div-container {
+  display: table;
+  width:100%;
+  margin-top: 50px;
+}
+
 .div-inline {
   display: inline-block;
   text-align: left;
   float: left;
+}
+
+.div-half {
+  float: left;
+  width: 50%;
 }
 
 .left-space {
@@ -51,3 +63,6 @@ html,body {
   margin-bottom: 20px;
 }
 
+/* #james-small-multiples #davis-small-multiples {
+  margin-bottom: 150px;
+} */
