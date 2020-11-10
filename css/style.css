@@ -63,6 +63,7 @@ html,body {
   margin-bottom: 20px;
 }
 
-/* #james-small-multiples #davis-small-multiples {
-  margin-bottom: 150px;
-} */
+/* rating stars */
+.checked {
+  color: orange;
+}

@@ -60,7 +60,7 @@ d3.csv('./files/james_davis_shooting_dist.csv', data => {
       davis_shooting_dist.push(row)
     }
   })
-  console.log(james_shooting_dist)
+  // console.log(james_shooting_dist)
 
   // create scale
   var shooting_dist_x = d3
