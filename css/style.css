@@ -1,18 +1,34 @@
+:root {
+  --LAKERS_YELLOW: #FDB927;
+  --LAKERS_YELLOW_OP: #ffdd94;
+  --LAKERS_PURPLE: #552583;
+  --LAKERS_BLACK: #000000;
+  --DARK_GREY: #787878;
+  --LIGHT_GREY: #d4d4d4;
+  --ORANGE: #ff9100;
+  --RED: #fd2727;
+  --GREEN: #2fa62b;
+  --BLUE: #276bfd;
+}
+
+
+@font-face {
+  font-family: ganhdi;
+  src: url('../gandhi-serif/GandhiSerif-Regular.otf')
+}
+
 html,body {
-  height:100%;
-  width: 1800px;
-  font-family: Helvetica;
+  width: 100%;
+  font-family: ganhdi;
+  line-height: 1.7em;
 }
 
 .page {
-  height: 70%;
   display: block;
   text-align: center;
   margin: 30px 30px;
-  padding: 5%;
-  /* background-color: whitesmoke; */
-  opacity: 0.1;
   transition: all 1000ms ease-in;
+  padding: 3%;
 }
 
 .text-show {
@@ -46,21 +62,84 @@ html,body {
   margin-left: 100px;
 }
 
-/* page 1 */
-#page-1-title {
-  height: 50%;
+/* section */
+.section-title {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  font-size: 24px;
+}
+
+/* divider */
+.three-dots {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.three-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: black;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+/* page 1 title */
+#page-1 {
   display: block;
-  text-align: left;
+  text-align: center;
+  /* padding: 3%; */
 }
 
 #page-1-title  h1 {
-  font-size: 120px;
-  margin-bottom: 30px;
+  font-size: 60px;
 }
 
 #page-1-title  h2 {
-  font-size: 40px;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 40px;
+  color: var(--DARK_GREY);
+}
+
+#page-1-title  p {
+  text-align: left;
+  font-size: 18px;
+  width: 500px;
+  margin: auto;
+  color: var(--DARK_GREY);
+}
+
+#page-1-title  h3 {
+  font-size: 20px;
+  color: var(--DARK_GREY);
+}
+
+#page-1-img {
+  margin-bottom: 60px;
+}
+
+#page-1-img img{
+  width: 800px;
+}
+
+/* page 2 lakers champ timeline*/
+#page-2 {
+  display: block;
+  text-align: center;
+}
+
+#lakers-champ-timeline {
+  margin: 50px 50px;
+  padding: 50px 50px;
+}
+
+#page-2 p {
+  text-align: left;
+  font-size: 18px;
+  width: 500px;
+  margin: auto;
+  color: var(--DARK_GREY);
 }
 
 /* rating stars */

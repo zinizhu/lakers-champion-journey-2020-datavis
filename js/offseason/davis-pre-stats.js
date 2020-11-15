@@ -215,7 +215,7 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
       )
 
     // add path
-    d3.select('.davis-pre-' + dimension)
+    var currPath = d3.select('.davis-pre-' + dimension)
       .append('path')
       .datum(data)
       .attr('fill', 'none')
@@ -232,6 +232,17 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
           )
           .y(d => davis_pre_stats_y[i](d[dimension]))
       )
+    
+      var len = currPath.node().getTotalLength()
+
+      currPath
+      .attr("stroke-dasharray", len + " " + len) 
+      .attr("stroke-dashoffset", len)
+      .transition()
+        .duration(1500)
+        .ease(d3.easeLinear)
+        .attr("stroke-dashoffset", 0);
+
 
     // add circles
     d3.select('.davis-pre-' + dimension)
