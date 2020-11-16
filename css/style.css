@@ -1,5 +1,5 @@
 :root {
-  --LAKERS_YELLOW: #FDB927;
+  --LAKERS_YELLOW: #fdb927;
   --LAKERS_YELLOW_OP: #ffdd94;
   --LAKERS_PURPLE: #552583;
   --LAKERS_BLACK: #000000;
@@ -11,13 +11,13 @@
   --BLUE: #276bfd;
 }
 
-
 @font-face {
   font-family: ganhdi;
-  src: url('../gandhi-serif/GandhiSerif-Regular.otf')
+  src: url('../gandhi-serif/GandhiSerif-Regular.otf');
 }
 
-html,body {
+html,
+body {
   width: 100%;
   font-family: ganhdi;
   line-height: 1.7em;
@@ -31,19 +31,27 @@ html,body {
   padding: 3%;
 }
 
+.page p {
+  text-align: left;
+  font-size: 18px;
+  width: 500px;
+  margin: auto;
+  color: var(--DARK_GREY);
+}
+
 .text-show {
   opacity: 1 !important;
 }
 
 .text-hide {
   opacity: 0.05;
-  transition: all 500ms ease-in;
+  transition: all 250ms ease-in;
 }
 
 /* layout */
 .div-container {
   display: table;
-  width:100%;
+  width: 100%;
   margin-top: 50px;
 }
 
@@ -64,7 +72,7 @@ html,body {
 
 /* section */
 .section-title {
-  padding-top: 50px;
+  padding-top: 40px;
   padding-bottom: 50px;
   font-size: 24px;
 }
@@ -92,25 +100,17 @@ html,body {
   /* padding: 3%; */
 }
 
-#page-1-title  h1 {
+#page-1-title h1 {
   font-size: 60px;
 }
 
-#page-1-title  h2 {
+#page-1-title h2 {
   font-size: 24px;
   margin-bottom: 40px;
   color: var(--DARK_GREY);
 }
 
-#page-1-title  p {
-  text-align: left;
-  font-size: 18px;
-  width: 500px;
-  margin: auto;
-  color: var(--DARK_GREY);
-}
-
-#page-1-title  h3 {
+#page-1-title h3 {
   font-size: 20px;
   color: var(--DARK_GREY);
 }
@@ -119,7 +119,7 @@ html,body {
   margin-bottom: 60px;
 }
 
-#page-1-img img{
+#page-1-img img {
   width: 800px;
 }
 
@@ -134,15 +134,131 @@ html,body {
   padding: 50px 50px;
 }
 
-#page-2 p {
+/* #page-2 p {
   text-align: left;
   font-size: 18px;
   width: 500px;
   margin: auto;
   color: var(--DARK_GREY);
+} */
+
+/* page-3 off-season */
+#davis-off-season {
+  margin: 50px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+#davis-off-season img {
+  margin: auto;
+  border-radius: 4px;
+  width: 360px;
+}
+
+#davis-off-season-left {
+  display: flex;
+  justify-content: right;
+  margin-right: 40px;
+}
+
+#davis-off-season-right {
+  margin-left: 40px;
+}
+
+#davis-pre-stats-small-multiples {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+#vogel-off-season {
+  margin: 50px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+#vogel-off-season img {
+  margin: auto;
+  border-radius: 4px;
+  width: 360px;
+}
+
+#vogel-off-season-left {
+  margin-right: 40px;
+}
+
+#vogel-off-season-right {
+  margin-left: 40px;
+}
+
+.other-players-off-season-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.other-players-off-season {
+  display: block;
+  text-align: center;
+}
+
+.other-players-off-season p {
+  text-align: center;
+}
+
+#player-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 
 /* rating stars */
 .checked {
   color: orange;
+}
+
+/* page-4 regular season */
+#regular-season-log-story {
+  margin-top: 100px;
+  text-align: left !important;
+}
+
+#regular-season-log-story-sections {
+  position: relative;
+  display: inline-block;
+  margin-left: 200px;
+  top: 0px;
+  z-index: 90;
+}
+
+.step {
+  margin-bottom: 300px;
+}
+
+.lakers-season-logs {
+  display: inline-block;
+  position: fixed;
+  top: 150px;
+  z-index: 1;
+  margin-left: 0;
+}
+
+#lakers-season-pts-text {
+  margin-top: 300px;
+}
+
+.lakers-season-pts-sec {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+#lakers-season-pts-rank {
+  margin-left: 50px;
+}
+
+#lakers-players-summary {
+  margin-top: 60px;
+  margin-bottom: 60px;
 }

@@ -3,8 +3,8 @@
 var davis_pre_pie_margin = { top: 10, bottom: 10, left: 10, right: 10 }
 var davis_pre_pie_width = 200
 var davis_pre_pie_height = 200
-var davis_pre_pie_outer_radius = 60
-var davis_pre_pie_inner_radius = 45
+var davis_pre_pie_outer_radius = 75
+var davis_pre_pie_inner_radius = 60
 
 // Compute the position of each group on the pie:
 var davis_pre_pie_scale = d3
@@ -90,27 +90,6 @@ for (var i = 0; i < 4; i++) {
     .attr('font-size', '24px')
    
 }
-
-// var davis_pre_fg = { miss: 0.4, made: 0.6 }
-// var davis_pre_pie_color = [COLOR.LAKERS_YELLOW_OP, COLOR.LAKERS_PURPLE]
-
-// var davis_pre_fg_ready = davis_zpre_pie_scale(d3.entries(davis_pre_fg))
-
-// davis_pre_pie
-//   .selectAll('davis_pre_fg_slice')
-//   .data(davis_pre_fg_ready)
-//   .enter()
-//   .append('path')
-//   .attr(
-//     'd',
-//     d3
-//       .arc()
-//       .innerRadius(davis_pre_pie_inner_radius)
-//       .outerRadius(davis_pre_pie_outer_radius)
-//   )
-//   .attr('fill', (d, i) => davis_pre_pie_color[i])
-//   .attr('stroke', 'white')
-//   .style('stroke-width', '2px')
 
 // define margin and svg size
 var davis_pre_stats_margin = { top: 10, bottom: 30, left: 20, right: 20 }
@@ -271,6 +250,6 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
         }
         return d
       })
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
   }
 })

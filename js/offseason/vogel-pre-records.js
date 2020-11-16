@@ -2,8 +2,8 @@
 var vogel_pre_pie_margin = { top: 10, bottom: 10, left: 10, right: 10 }
 var vogel_pre_pie_width = 200
 var vogel_pre_pie_height = 200
-var vogel_pre_pie_outer_radius = 60
-var vogel_pre_pie_inner_radius = 45
+var vogel_pre_pie_outer_radius = 75
+var vogel_pre_pie_inner_radius = 60
 
 // Compute the position of each group on the pie:
 var vogel_pre_pie_scale = d3
