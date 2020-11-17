@@ -226,13 +226,17 @@ body {
 #regular-season-log-story-sections {
   position: relative;
   display: inline-block;
-  margin-left: 200px;
+  margin-left: 100px;
   top: 0px;
   z-index: 90;
 }
 
 .step {
   margin-bottom: 300px;
+}
+
+.step p {
+  margin-left: 0px;
 }
 
 .lakers-season-logs {
@@ -261,4 +265,10 @@ body {
 #lakers-players-summary {
   margin-top: 60px;
   margin-bottom: 60px;
+}
+
+.lakers-season-story-image {
+  width: 470px;
+  border-radius: 4px;
+  margin-bottom: 30px;
 }

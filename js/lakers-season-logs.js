@@ -52,7 +52,13 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     var fgPctClass = '.season-percentage-FG-' + d.GAME_ID
     var fg3PctClass = '.season-percentage-FG3-' + d.GAME_ID
     var color = d.DIFF < 0 ? COLOR.LAKERS_BLACK : COLOR.ORANGE
-    d3.selectAll(rectClass).style('fill', color)
+
+    var originalColor = d3.select(rectClass).style('fill')
+    if (originalColor !== 'red') {
+      d3.selectAll(rectClass).style('fill', color)
+    }
+
+    
     d3.selectAll(textClass).style('display', 'block')
     d3.selectAll(fgPctClass)
       .attr('r', 4)
@@ -68,7 +74,12 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     var fgPctClass = '.season-percentage-FG-' + d.GAME_ID
     var fg3PctClass = '.season-percentage-FG3-' + d.GAME_ID
     var color = d.DIFF < 0 ? COLOR.DARK_GREY : COLOR.LAKERS_YELLOW
-    d3.selectAll(rectClass).style('fill', color)
+
+    var originalColor = d3.select(rectClass).style('fill')
+    if (originalColor !== 'red') {
+      d3.selectAll(rectClass).style('fill', color)
+    }
+    
     d3.selectAll(textClass).style('display', 'none')
     d3.selectAll(fgPctClass)
       .attr('r', 3)
@@ -117,7 +128,6 @@ d3.csv('./files/lakers_game_logs.csv', data => {
       }
       return y(d.DIFF) - 8
     })
-  // .style('display', 'none')
 
   texts
     .append('tspan')
