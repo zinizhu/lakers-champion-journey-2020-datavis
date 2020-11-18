@@ -147,7 +147,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         gameDetails.push(gamelog[playoffs_details_game_stats[j]])
       }
       for (var j = 0; j < playoffs_details_game_stats.length; j++) {
-        oppoGameDetails.push(oppGamelog[playoffs_details_game_stats[j]])
+        oppoGameDetails.push(+oppGamelog[playoffs_details_game_stats[j]])
       }
 
       // highlight border
@@ -162,9 +162,44 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('stroke', COLOR.LAKERS_YELLOW)
         .attr('stroke-opacity', 0.5)
 
-
       playoffs_deatails.selectAll('.playoffs-game-details').remove()
       playoffs_deatails_oppo.selectAll('.playoffs-oppo-game-details').remove()
+      playoffs_deatails.selectAll('.playoffs-game-details-text').remove()
+      playoffs_deatails_oppo
+        .selectAll('.playoffs-oppo-game-details-text')
+        .remove()
+
+      playoffs_deatails
+        .selectAll('playoffs-game-details-texts')
+        .data(gameDetails)
+        .enter()
+        .append('text')
+        .attr('class', 'playoffs-game-details-text')
+        .attr('x', (d, i) => playoffs_details_x_scales[i](+d) - 35)
+        .attr('y', (d, i) => game_details_scales.y_scale(i) + 17)
+        .text(d => d)
+        .attr('font-size', 12)
+        .attr('fill', COLOR.DARK_GREY)
+
+      console.log(gameDetails)
+
+      playoffs_deatails_oppo
+        .selectAll('playoffs-oppo-game-details-texts')
+        .data(oppoGameDetails)
+        .enter()
+        .append('text')
+        .attr('class', 'playoffs-oppo-game-details-text')
+        .attr(
+          'x',
+          (d, i) =>
+            game_details_scales.x_scales_oppo[i](0) +
+            game_details_scales.x_scales_oppo[i](d) +
+            25
+        )
+        .attr('y', (d, i) => game_details_scales.y_scale(i) + 17)
+        .text(d => d)
+        .attr('font-size', 12)
+        .attr('fill', COLOR.DARK_GREY)
 
       playoffs_deatails
         .selectAll('playoffs-game-details')
@@ -172,7 +207,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .enter()
         .append('rect')
         .attr('class', 'playoffs-game-details')
-        .attr('x', (d, i) => playoffs_details_x_scales[i](d))
+        .attr('x', (d, i) => playoffs_details_x_scales[i](+d))
         .attr('y', (d, i) => game_details_scales.y_scale(i))
         .attr(
           'width',
@@ -206,7 +241,9 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('class', 'playoffs-oppo-game-details')
         .attr('x', (d, i) => game_details_scales.x_scales_oppo[i](0))
         .attr('y', (d, i) => game_details_scales.y_scale(i))
-        .attr('width', (d, i) => game_details_scales.x_scales_oppo[i](d))
+        .attr('width', (d, i) => {
+          return game_details_scales.x_scales_oppo[i](+d)
+        })
         .attr('height', game_details_scales.y_scale.bandwidth())
         .attr('fill', COLOR.BLUE)
 
@@ -243,7 +280,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
       playoffs_players.selectAll('.playoffs-player-stats-path').remove()
       playoffs_players.selectAll('.playoffs-player-stats-circle').remove()
       playoffs_players.selectAll('.playoffs-player-stats-text').remove()
-      
+
       playoffs_players
         .append('path')
         .datum(selected_player_arr) // .data vs .datum: former allows multiple append, later allows 1
@@ -260,7 +297,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             .y(d => d.y)
         )
 
-        playoffs_players
+      playoffs_players
         .selectAll('playoffs-player-stats-circles')
         .data(selected_player_arr)
         .enter()
@@ -271,7 +308,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('r', 8)
         .attr('fill', COLOR.LAKERS_YELLOW)
 
-        playoffs_players
+      playoffs_players
         .selectAll('playoffs-player-stats-texts')
         .data(selected_player_arr)
         .enter()
@@ -302,7 +339,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         d => d.name === selected_player_name
       )
       var selected_player_arr = selected_player[0].log
-        console.log(selected_player_arr)
+      console.log(selected_player_arr)
       playoffs_players.selectAll('.playoffs-player-stats-path').remove()
       playoffs_players.selectAll('.playoffs-player-stats-circle').remove()
       playoffs_players.selectAll('.playoffs-player-stats-text').remove()
@@ -323,7 +360,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             .y(d => d.y)
         )
 
-        playoffs_players
+      playoffs_players
         .selectAll('playoffs-player-stats-circles')
         .data(selected_player_arr)
         .enter()
@@ -334,7 +371,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('r', 8)
         .attr('fill', COLOR.LAKERS_YELLOW)
 
-        playoffs_players
+      playoffs_players
         .selectAll('playoffs-player-stats-texts')
         .data(selected_player_arr)
         .enter()
