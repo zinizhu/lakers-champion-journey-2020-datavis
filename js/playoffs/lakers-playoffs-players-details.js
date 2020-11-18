@@ -1,5 +1,5 @@
 // define margin and svg size
-var playoffs_players_margin = { top: 10, bottom: 10, left: 10, right: 10 }
+var playoffs_players_margin = { top: 10, bottom: 10, left: 10, right: 100 }
 var playoffs_players_width = 500
 var playoffs_players_height = 500
 var playoffs_players_axis_length = 180
@@ -144,11 +144,15 @@ d3.csv('./files/lakers_playoffs_players_logs.csv', data => {
     var game_name = row.Name + '-' + row.Game_ID
     var current_game_log_arr = []
     for (var i = 0; i < playoffs_players_stats_dimension.length + 1; i++) {
+      
       var j = i % playoffs_players_stats_dimension.length
       var stat = +row[playoffs_players_stats_dimension[j]]
       current_game_log_arr.push({
         x: playoffs_players_stats_scales_x[j](stat),
-        y: playoffs_players_stats_scales_y[j](stat)
+        y: playoffs_players_stats_scales_y[j](stat),
+        text_x: playoffs_players_stats_scales_x[j](Math.min(stat + playoffs_players_stats_scales_max[i % 6] / 8, playoffs_players_stats_scales_max[i % 6])),
+        text_y: playoffs_players_stats_scales_y[j](Math.min(stat + playoffs_players_stats_scales_max[i % 6] / 8, playoffs_players_stats_scales_max[i % 6])),
+        stats: stat
       })
     }
 

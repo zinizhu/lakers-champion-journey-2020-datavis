@@ -1,5 +1,5 @@
 // define margin and svg size
-var season_percentage_margin = { top: 30, bottom: 10, left: 30, right: 30 }
+var season_percentage_margin = { top: 30, bottom: 20, left: 30, right: 30 }
 var season_percentage_width = 1000
 var season_percentage_height = 120
 
@@ -93,6 +93,18 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .attr('r', 3)
     .attr('fill', COLOR.LAKERS_PURPLE)
 
+  // append circle text
+  seasonPercentage
+    .selectAll('fg-circle-text')
+    .data(data)
+    .enter()
+    .append('text')
+    .attr('class', d => 'season-percentage-FG-text-' + d.GAME_ID)
+    .attr('x', (d, i) => x(i) - 10)
+    .attr('y', d => y(d.FG_PCT) - 15)
+    .text(d => (d.FG_PCT * 100).toFixed(1) + '%')
+    .attr('display', 'none')
+
   seasonPercentage
     .selectAll('fg3-circle')
     .data(data)
@@ -103,6 +115,18 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .attr('cy', d => y(d.FG3_PCT))
     .attr('r', 3)
     .attr('fill', COLOR.RED)
+
+  // append circle text
+  seasonPercentage
+    .selectAll('fg3-circle-text')
+    .data(data)
+    .enter()
+    .append('text')
+    .attr('class', d => 'season-percentage-FG3-text-' + d.GAME_ID)
+    .attr('x', (d, i) => x(i) - 10)
+    .attr('y', d => y(d.FG3_PCT) + 25)
+    .text(d => (d.FG3_PCT * 100).toFixed(1) + '%')
+    .attr('display', 'none')
 
   // append labels
   seasonPercentage

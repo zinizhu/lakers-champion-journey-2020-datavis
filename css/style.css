@@ -134,14 +134,6 @@ body {
   padding: 50px 50px;
 }
 
-/* #page-2 p {
-  text-align: left;
-  font-size: 18px;
-  width: 500px;
-  margin: auto;
-  color: var(--DARK_GREY);
-} */
-
 /* page-3 off-season */
 #davis-off-season {
   margin: 50px 100px;
@@ -152,13 +144,17 @@ body {
 #davis-off-season img {
   margin: auto;
   border-radius: 4px;
-  width: 360px;
+  width: 300px;
 }
 
 #davis-off-season-left {
-  display: flex;
-  justify-content: right;
   margin-right: 40px;
+}
+
+#davis-off-season-left p {
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
 }
 
 #davis-off-season-right {
@@ -179,7 +175,7 @@ body {
 #vogel-off-season img {
   margin: auto;
   border-radius: 4px;
-  width: 360px;
+  width: 300px;
 }
 
 #vogel-off-season-left {
@@ -188,6 +184,12 @@ body {
 
 #vogel-off-season-right {
   margin-left: 40px;
+}
+
+#vogel-off-season-right p {
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
 }
 
 .other-players-off-season-row {
@@ -271,4 +273,37 @@ body {
   width: 470px;
   border-radius: 4px;
   margin-bottom: 30px;
+}
+
+
+/* page5 - playoffs */
+
+#lakers-playoffs-general-stats {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#playoffs-dashboard {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#lakers-playoffs-game-details-section {
+  display: flex;
+  justify-content: center;
+}
+
+#playoffs-dashboard-left {
+  margin-right: 50px;
+}
+
+#lakers-playoffs-records {
+  margin-left: 80px;
+}
+
+#lakers-playoffs-players-select {
+  display: block;
+  text-align: right;
+  margin-top: 30px;
 }

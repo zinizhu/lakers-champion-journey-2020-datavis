@@ -241,6 +241,9 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
       var selected_player_arr = selected_player[0].log
 
       playoffs_players.selectAll('.playoffs-player-stats-path').remove()
+      playoffs_players.selectAll('.playoffs-player-stats-circle').remove()
+      playoffs_players.selectAll('.playoffs-player-stats-text').remove()
+      
       playoffs_players
         .append('path')
         .datum(selected_player_arr) // .data vs .datum: former allows multiple append, later allows 1
@@ -256,6 +259,29 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             .x(d => d.x)
             .y(d => d.y)
         )
+
+        playoffs_players
+        .selectAll('playoffs-player-stats-circles')
+        .data(selected_player_arr)
+        .enter()
+        .append('circle')
+        .attr('class', 'playoffs-player-stats-circle')
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', 8)
+        .attr('fill', COLOR.LAKERS_YELLOW)
+
+        playoffs_players
+        .selectAll('playoffs-player-stats-texts')
+        .data(selected_player_arr)
+        .enter()
+        .append('text')
+        .attr('class', 'playoffs-player-stats-text')
+        .attr('x', d => d.text_x)
+        .attr('y', d => d.text_y)
+        .text(d => d.stats)
+        .attr('font-size', 16)
+        .attr('fill', COLOR.DARK_GREY)
     }
 
     d3.select('#lakers-playoffs-players-button').on('change', function (d) {
@@ -276,8 +302,11 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         d => d.name === selected_player_name
       )
       var selected_player_arr = selected_player[0].log
-
+        console.log(selected_player_arr)
       playoffs_players.selectAll('.playoffs-player-stats-path').remove()
+      playoffs_players.selectAll('.playoffs-player-stats-circle').remove()
+      playoffs_players.selectAll('.playoffs-player-stats-text').remove()
+
       playoffs_players
         .append('path')
         .datum(selected_player_arr) // .data vs .datum: former allows multiple append, later allows 1
@@ -293,6 +322,29 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             .x(d => d.x)
             .y(d => d.y)
         )
+
+        playoffs_players
+        .selectAll('playoffs-player-stats-circles')
+        .data(selected_player_arr)
+        .enter()
+        .append('circle')
+        .attr('class', 'playoffs-player-stats-circle')
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', 8)
+        .attr('fill', COLOR.LAKERS_YELLOW)
+
+        playoffs_players
+        .selectAll('playoffs-player-stats-texts')
+        .data(selected_player_arr)
+        .enter()
+        .append('text')
+        .attr('class', 'playoffs-player-stats-text')
+        .attr('x', d => d.text_x)
+        .attr('y', d => d.text_y)
+        .text(d => d.stats)
+        .attr('font-size', 16)
+        .attr('fill', COLOR.DARK_GREY)
     })
 
     selectGame(0, 0)

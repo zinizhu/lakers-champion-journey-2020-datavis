@@ -50,7 +50,9 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     var rectClass = '.season-log-' + d.GAME_ID
     var textClass = '.season-log-text-' + d.GAME_ID
     var fgPctClass = '.season-percentage-FG-' + d.GAME_ID
+    var fgPctTextClass = '.season-percentage-FG-text-' + d.GAME_ID
     var fg3PctClass = '.season-percentage-FG3-' + d.GAME_ID
+    var fg3PctTextClass = '.season-percentage-FG3-text-' + d.GAME_ID
     var color = d.DIFF < 0 ? COLOR.LAKERS_BLACK : COLOR.ORANGE
 
     var originalColor = d3.select(rectClass).style('fill')
@@ -58,28 +60,31 @@ d3.csv('./files/lakers_game_logs.csv', data => {
       d3.selectAll(rectClass).style('fill', color)
     }
 
-    
     d3.selectAll(textClass).style('display', 'block')
     d3.selectAll(fgPctClass)
       .attr('r', 4)
       .style('fill', COLOR.LAKERS_YELLOW)
+    d3.selectAll(fgPctTextClass).style('display', 'block')
     d3.selectAll(fg3PctClass)
       .attr('r', 4)
       .style('fill', COLOR.LAKERS_YELLOW)
+    d3.selectAll(fg3PctTextClass).style('display', 'block')
   }
 
   const doNotHighlight = function (d) {
     var rectClass = '.season-log-' + d.GAME_ID
     var textClass = '.season-log-text-' + d.GAME_ID
     var fgPctClass = '.season-percentage-FG-' + d.GAME_ID
+    var fgPctTextClass = '.season-percentage-FG-text-' + d.GAME_ID
     var fg3PctClass = '.season-percentage-FG3-' + d.GAME_ID
+    var fg3PctTextClass = '.season-percentage-FG3-text-' + d.GAME_ID
     var color = d.DIFF < 0 ? COLOR.DARK_GREY : COLOR.LAKERS_YELLOW
 
     var originalColor = d3.select(rectClass).style('fill')
     if (originalColor !== 'red') {
       d3.selectAll(rectClass).style('fill', color)
     }
-    
+
     d3.selectAll(textClass).style('display', 'none')
     d3.selectAll(fgPctClass)
       .attr('r', 3)
@@ -87,6 +92,8 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     d3.selectAll(fg3PctClass)
       .attr('r', 3)
       .style('fill', COLOR.RED)
+      d3.selectAll(fgPctTextClass).style('display', 'none')
+      d3.selectAll(fg3PctTextClass).style('display', 'none')
   }
 
   // draw rects

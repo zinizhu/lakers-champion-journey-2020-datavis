@@ -1,7 +1,7 @@
 // define margin and svg size
-var season_summary_margin = { top: 30, bottom: 20, left: 50, right: 10 }
-var season_summary_width = 700
-var season_summary_height = 380
+var season_summary_margin = { top: 100, bottom: 20, left: 100, right: 100 }
+var season_summary_width = 900
+var season_summary_height = 500
 
 // create svg
 var seasonPlayersSummary = d3
@@ -210,81 +210,93 @@ d3.csv('./files/lakers_players_performance.csv', data => {
   // add hovering text
   seasonPlayersSummary
     .append('text')
-    .attr('x', -30)
-    .attr('y', 5)
+    .attr('x', -55)
+    .attr('y', -10)
     .text('Player: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 200)
-    .attr('y', 5)
+    .attr('x', 240)
+    .attr('y', -10)
     .text('PTS: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 290)
-    .attr('y', 5)
+    .attr('x', 350)
+    .attr('y', -10)
     .text('REB: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 370)
-    .attr('y', 5)
+    .attr('x', 460)
+    .attr('y', -10)
     .text('AST: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 450)
-    .attr('y', 5)
+    .attr('x', 570)
+    .attr('y', -10)
     .text('STL: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
-    .attr('x', 530)
-    .attr('y', 5)
+    .attr('x', 680)
+    .attr('y', -10)
     .text('TOV: ')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-name')
-    .attr('x', 23)
-    .attr('y', 5)
+    .attr('x', 10)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-PTS')
-    .attr('x', 240)
-    .attr('y', 4.5)
+    .attr('x',290)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-REB')
-    .attr('x', 330)
-    .attr('y', 4.5)
+    .attr('x', 400)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-AST')
-    .attr('x', 405)
-    .attr('y', 4.5)
+    .attr('x', 510)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-STL')
-    .attr('x', 485)
-    .attr('y', 4.5)
+    .attr('x', 620)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-TOV')
-    .attr('x', 570)
-    .attr('y', 4.5)
+    .attr('x', 730)
+    .attr('y', -10)
     .text('-.-')
+    .attr('font-size', 20)
 
   // add legends
   var lakers_players_legends = seasonPlayersSummary

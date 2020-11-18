@@ -17,13 +17,11 @@ var vogel_pre_pie_color = [COLOR.LIGHT_GREY, COLOR.BLUE]
 
 var vogel_pre_regular = { lose: 291, win: 304 }
 var vogel_pre_playoff = { lose: 30, win: 31 }
+var vogel_pre_exp = { lose: 0, win: 1 }
 
-var vogel_pre_pie_labels = ['Regular Season', 'Playoffs']
-var vogel_pre_pie_figures = ['51.1', '50.8']
-var vogel_pre_figures_raw = [
-  vogel_pre_regular,
-  vogel_pre_playoff
-]
+var vogel_pre_pie_labels = ['Regular Season', 'Playoffs', 'Experience']
+var vogel_pre_pie_figures = ['51.1', '50.8', '7+']
+var vogel_pre_figures_raw = [vogel_pre_regular, vogel_pre_playoff, vogel_pre_exp]
 var vogel_pre_figures = []
 vogel_pre_figures_raw.forEach(row => {
   vogel_pre_figures.push(vogel_pre_pie_scale(d3.entries(row)))
@@ -43,17 +41,21 @@ var vogel_pre_pies = d3
   .attr(
     'height',
     vogel_pre_pie_height +
-    vogel_pre_pie_margin.top +
-    vogel_pre_pie_margin.bottom
+      vogel_pre_pie_margin.top +
+      vogel_pre_pie_margin.bottom
   )
   .append('g')
   .attr('class', (d, i) => 'vogel-pre-pie-' + i)
   .attr(
     'transform',
-    'translate(' + vogel_pre_pie_width / 2 + ',' + vogel_pre_pie_height / 2 + ')'
+    'translate(' +
+      vogel_pre_pie_width / 2 +
+      ',' +
+      vogel_pre_pie_height / 2 +
+      ')'
   )
 
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 3; i++) {
   d3.select('.vogel-pre-pie-' + i)
     .selectAll('vogel_pre_fg_slice')
     .data(vogel_pre_figures[i])
@@ -68,16 +70,17 @@ for (var i = 0; i < 2; i++) {
     )
     .attr('fill', (d, c) => vogel_pre_pie_color[c])
 
-    d3.select('.vogel-pre-pie-' + i)
+  var legend = i === 2 ? 'Years of Coaching' : 'win%'
+  d3.select('.vogel-pre-pie-' + i)
     .append('text')
     .attr('x', -0)
     .attr('y', -17)
-    .text('win%')
+    .text(legend)
     .style('text-anchor', 'middle')
     .attr('font-size', '10px')
 
-   // add figures
-   d3.select('.vogel-pre-pie-' + i)
+  // add figures
+  d3.select('.vogel-pre-pie-' + i)
     .append('text')
     .attr('x', -0)
     .attr('y', 10)
@@ -85,13 +88,12 @@ for (var i = 0; i < 2; i++) {
     .style('text-anchor', 'middle')
     .attr('font-size', '24px')
 
-   // add season
-   d3.select('.vogel-pre-pie-' + i)
+  // add season
+  d3.select('.vogel-pre-pie-' + i)
     .append('text')
     .attr('x', -0)
-    .attr('y', 90)
+    .attr('y', 100)
     .text(vogel_pre_pie_labels[i])
     .style('text-anchor', 'middle')
     .attr('font-size', '12px')
-   
 }
