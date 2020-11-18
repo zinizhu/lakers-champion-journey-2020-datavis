@@ -48,7 +48,7 @@ for (var i = 0, length = pageElements.length; i < length; i++) {
         }
       }
     },
-    offset: 500
+    offset:500
   })
 
 
@@ -70,7 +70,7 @@ for (var i = 0, length = pageElements.length; i < length; i++) {
     offset: function () {
       var order = +this.element.getAttribute('order')
       if (order === pageElements.length - 1) {
-        return -200
+        return -600
       } else {
         return -this.element.clientHeight * 0.2
       }
