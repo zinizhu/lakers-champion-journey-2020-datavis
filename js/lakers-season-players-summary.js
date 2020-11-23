@@ -167,7 +167,9 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     var stlClass = '.lakers-players-summary-STL'
     var tovClass = '.lakers-players-summary-TOV'
 
-    d3.selectAll(pathClass).style('stroke-width', '3px').style('opacity', '1')
+    d3.selectAll(pathClass)
+      .style('stroke-width', '3px')
+      .style('opacity', '1')
     d3.selectAll(playerClass).text(d.name)
     d3.selectAll(ptsClass).text(d.PTS)
     d3.selectAll(rebClass).text(d.REB)
@@ -178,7 +180,9 @@ d3.csv('./files/lakers_players_performance.csv', data => {
 
   const lakers_players_summary_doNotHighlight = function (d) {
     var pathClass = '.lakers-players-summary-' + d.name.split(' ')[0]
-    d3.selectAll(pathClass).style('stroke-width', '1px').style('opacity', '0.6')
+    d3.selectAll(pathClass)
+      .style('stroke-width', '1px')
+      .style('opacity', '0.6')
   }
 
   // draw path
@@ -261,7 +265,7 @@ d3.csv('./files/lakers_players_performance.csv', data => {
   seasonPlayersSummary
     .append('text')
     .attr('class', 'lakers-players-summary-PTS')
-    .attr('x',290)
+    .attr('x', 290)
     .attr('y', -10)
     .text('-.-')
     .attr('font-size', 20)

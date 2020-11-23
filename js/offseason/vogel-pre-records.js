@@ -21,7 +21,12 @@ var vogel_pre_exp = { lose: 0, win: 1 }
 
 var vogel_pre_pie_labels = ['Regular Season', 'Playoffs', 'Experience']
 var vogel_pre_pie_figures = ['51.1', '50.8', '7+']
-var vogel_pre_figures_raw = [vogel_pre_regular, vogel_pre_playoff, vogel_pre_exp]
+var vogel_pre_figures_raw = [
+  vogel_pre_regular,
+  vogel_pre_playoff,
+  vogel_pre_exp
+]
+// var vogel_pre_figures_raw = [vogel_pre_regular, vogel_pre_playoff]
 var vogel_pre_figures = []
 vogel_pre_figures_raw.forEach(row => {
   vogel_pre_figures.push(vogel_pre_pie_scale(d3.entries(row)))
@@ -55,7 +60,7 @@ var vogel_pre_pies = d3
       ')'
   )
 
-for (var i = 0; i < 3; i++) {
+for (var i = 0; i < 2; i++) {
   d3.select('.vogel-pre-pie-' + i)
     .selectAll('vogel_pre_fg_slice')
     .data(vogel_pre_figures[i])
@@ -70,7 +75,7 @@ for (var i = 0; i < 3; i++) {
     )
     .attr('fill', (d, c) => vogel_pre_pie_color[c])
 
-  var legend = i === 2 ? 'Years of Coaching' : 'win%'
+  var legend = 'win%'
   d3.select('.vogel-pre-pie-' + i)
     .append('text')
     .attr('x', -0)
@@ -97,3 +102,19 @@ for (var i = 0; i < 3; i++) {
     .style('text-anchor', 'middle')
     .attr('font-size', '12px')
 }
+
+d3.select('.vogel-pre-pie-' + 2)
+  .append('text')
+  .attr('x', -0)
+  .attr('y', -17)
+  .text('Years of Coaching')
+  .style('text-anchor', 'middle')
+  .attr('font-size', '16px')
+
+d3.select('.vogel-pre-pie-' + 2)
+  .append('text')
+  .attr('x', -0)
+  .attr('y', 30)
+  .text(vogel_pre_pie_figures[2])
+  .style('text-anchor', 'middle')
+  .attr('font-size', '36px')

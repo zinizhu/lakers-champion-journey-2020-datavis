@@ -1,5 +1,5 @@
 // define margin and svg size
-var lakers_season_pts_rank_margin = { top: 10, bottom: 10, left: 10, right: 10 }
+var lakers_season_pts_rank_margin = { top: 10, bottom: 30, left: 40, right: 30 }
 var lakers_season_pts_rank_width = 350
 var lakers_season_pts_rank_height = 400
 
@@ -56,6 +56,34 @@ d3.csv('./files/all_team_performance.csv', data => {
     var textClass = '.season-rank-text-' + d.team
     d3.selectAll(rectClass).style('fill', COLOR.LAKERS_PURPLE)
     d3.selectAll(textClass).style('display', 'block')
+
+    seasonPTSDots.selectAll('.lakers-game-dots').remove()
+    seasonPTSDots.selectAll('.all-team-dots-legend').remove()
+
+    seasonPTSDots
+      .selectAll('lakers-game-dots')
+      .data(all_teams_regular_logs[d.team])
+      .enter()
+      .append('circle')
+      .attr('class', d => 'lakers-game-dots lakers-season-pts-' + d.id)
+      .attr('cx', d => {
+        return seasonPTSDots_random()
+      })
+      .attr('cy', d => seasonPTSDots_y(d.PTS))
+      .attr('r', 4)
+      .attr('fill', d => {
+        if (d.wl === 'W') {
+          return COLOR.LAKERS_PURPLE
+        }
+        return COLOR.RED
+      })
+
+    seasonPTSDots
+      .append('text')
+      .attr('class', 'all-team-dots-legend')
+      .attr('x', 0)
+      .attr('y', 30)
+      .text(d.team + ' PPG')
   }
 
   const season_rank_bar_doNotHighlight = function (d) {
@@ -106,4 +134,22 @@ d3.csv('./files/all_team_performance.csv', data => {
     .attr('y', (d, i) => season_rank_y(i) + 10)
     .text(d => d.team + ' ' + d.PTS)
     .style('display', 'none')
+
+  seasonPTSRank
+    .append('text')
+    .attr('x', lakers_season_pts_rank_width / 3)
+    .attr('y', lakers_season_pts_rank_height + 20)
+    .text('PPG')
+    .style('text-anchor', 'middle')
+
+  seasonPTSRank
+    .selectAll('team-rank-names')
+    .data(all_team_PTS)
+    .enter()
+    .append('text')
+    .attr('x', -25)
+    .attr('y', (d, i) => season_rank_y(i) + 9)
+    .attr('font-size', '10px')
+    .text(d => d.team)
+    .style('text-anchor', 'middle')
 })

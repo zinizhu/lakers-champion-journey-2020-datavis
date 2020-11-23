@@ -21,34 +21,54 @@ var seasonPTSDots = d3
     'translate(' + season_dots_margin.left + ',' + season_dots_margin.top + ')'
   )
 
+// read all team's logs
+var all_teams_regular_logs = {}
+d3.csv('./files/all_game_logs.csv', data => {
+  data.forEach(row => {
+    if (!(row.TEAM_ABBREVIATION in all_teams_regular_logs)) {
+      all_teams_regular_logs[row.TEAM_ABBREVIATION] = []
+    }
+    all_teams_regular_logs[row.TEAM_ABBREVIATION].push({
+      wl: row.WL,
+      PTS: +row.PTS,
+      id: row.GAME_ID
+    })
+  })
+})
+
+var seasonPTSDots_random = d3.randomUniform(30, season_dots_width - 30)
+var seasonPTSDots_x
+var seasonPTSDots_y
+
 // read data
 d3.csv('./files/lakers_game_logs.csv', data => {
   var lakersAllGames = []
   data.forEach(row => {
     lakersAllGames.push({ wl: row.WL, PTS: +row.PTS, id: row.GAME_ID })
   })
-  // console.log(lakersAllGames)
 
   // axis
-  var seasonPTSDots_random = d3.randomUniform(30, season_dots_width - 30)
-  var seasonPTSDots_x = d3
+  seasonPTSDots_x = d3
     .scaleLinear()
     .domain([0, season_dots_width])
     .range([0, season_dots_width])
-  var seasonPTSDots_y = d3
+  seasonPTSDots_y = d3
     .scaleLinear()
     .domain([
-      d3.min(lakersAllGames, d => d.PTS) * 0.95,
-      d3.max(lakersAllGames, d => d.PTS)
+      // d3.min(lakersAllGames, d => d.PTS) * 0.95,
+      // d3.max(lakersAllGames, d => d.PTS)
+      60,
+      160
     ])
     .range([season_dots_height, 50])
 
   // add title and legends
   seasonPTSDots
     .append('text')
+    .attr('class', 'all-team-dots-legend')
     .attr('x', 0)
     .attr('y', 30)
-    .text('Lakers PPG')
+    .text('LAL PPG')
 
   seasonPTSDots
     .append('circle')
@@ -94,7 +114,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .data(lakersAllGames)
     .enter()
     .append('circle')
-    .attr('class', d => 'lakers-season-pts-' + d.id)
+    .attr('class', d => 'lakers-game-dots lakers-season-pts-' + d.id)
     .attr('cx', d => {
       return seasonPTSDots_random()
     })
