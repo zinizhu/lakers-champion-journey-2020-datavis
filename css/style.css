@@ -50,20 +50,15 @@ body {
 
 /* layout */
 .div-container {
-  display: table;
+  display: flex;
+  justify-content: center;
   width: 100%;
   margin-top: 50px;
 }
 
-.div-inline {
-  display: inline-block;
-  text-align: left;
-  float: left;
-}
-
 .div-half {
-  float: left;
-  width: 50%;
+  width: 800px;
+
 }
 
 .left-space {
@@ -277,7 +272,6 @@ body {
 
 
 /* page5 - playoffs */
-
 #lakers-playoffs-general-stats {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -307,3 +301,5 @@ body {
   text-align: right;
   margin-top: 30px;
 }
+
+/* page6 LBJ & AD */
