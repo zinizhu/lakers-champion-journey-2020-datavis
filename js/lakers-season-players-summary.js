@@ -194,17 +194,22 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .append('path')
     // .attr('class', d => 'lakers-players-summary-path lakers-players-summary-' + d.name.split(' ')[0])
     .attr('class', d => {
-      var team = ""
+      var team = ''
       if (first_team.includes(d.name)) {
-        team = "starting"
+        team = 'starting'
       } else if (second_team.includes(d.name)) {
-        team = "bench"
+        team = 'bench'
       } else if (third_team.includes(d.name)) {
-        team = "third"
+        team = 'third'
       } else if (fourth_team.includes(d.name)) {
-        team = "fourth"
+        team = 'fourth'
       }
-      return "lakers-players-summary-path lakers-players-summary-" + team +" lakers-players-summary-" + d.name.split(' ')[0]
+      return (
+        'lakers-players-summary-path lakers-players-summary-' +
+        team +
+        ' lakers-players-summary-' +
+        d.name.split(' ')[0]
+      )
     })
     .attr('d', path)
     .style('fill', 'none')
@@ -329,14 +334,23 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .range([season_summary_height / 3 + 5, season_summary_height / 3 + 65])
     .domain([0, 3])
 
-  var legends = ['starting five', 'bench players', 'third team', 'fourth team', 'reset']
+  var legends = [
+    'starting five',
+    'bench players',
+    'third team',
+    'fourth team',
+    'reset'
+  ]
 
-  function clickLengend(d) {
+  function clickLengend (d) {
     if (d === 'reset') {
       d3.selectAll('.lakers-players-summary-path').attr('display', 'block')
     } else {
       d3.selectAll('.lakers-players-summary-path').attr('display', 'none')
-      d3.selectAll('.lakers-players-summary-' + d.split(' ')[0]).attr('display', 'block')
+      d3.selectAll('.lakers-players-summary-' + d.split(' ')[0]).attr(
+        'display',
+        'block'
+      )
     }
   }
 
@@ -361,58 +375,4 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .attr('r', 5)
     .attr('fill', (d, i) => lakers_players_performance_colors[i])
     .on('click', clickLengend)
-
-  // lakers_players_legends
-  //   .append('circle')
-  //   .attr('cx', 10)
-  //   .attr('cy', season_summary_height / 3)
-  //   .attr('r', 4)
-  //   .attr('fill', lakers_players_performance_colors[0])
-
-
-
-  // lakers_players_legends
-  //   .append('text')
-  //   .attr('x', 20)
-  //   .attr('y', season_summary_height / 3 + 5)
-  //   .text('starting five')
-
-  // lakers_players_legends
-  //   .append('circle')
-  //   .attr('cx', 10)
-  //   .attr('cy', season_summary_height / 3 + 20)
-  //   .attr('r', 4)
-  //   .attr('fill', lakers_players_performance_colors[1])
-
-  // lakers_players_legends
-  //   .append('text')
-  //   .attr('x', 20)
-  //   .attr('y', season_summary_height / 3 + 25)
-  //   .text('bench players')
-
-  // lakers_players_legends
-  //   .append('circle')
-  //   .attr('cx', 10)
-  //   .attr('cy', season_summary_height / 3 + 40)
-  //   .attr('r', 4)
-  //   .attr('fill', lakers_players_performance_colors[2])
-
-  // lakers_players_legends
-  //   .append('text')
-  //   .attr('x', 20)
-  //   .attr('y', season_summary_height / 3 + 45)
-  //   .text('third team')
-
-  // lakers_players_legends
-  //   .append('circle')
-  //   .attr('cx', 10)
-  //   .attr('cy', season_summary_height / 3 + 60)
-  //   .attr('r', 4)
-  //   .attr('fill', lakers_players_performance_colors[3])
-
-  // lakers_players_legends
-  //   .append('text')
-  //   .attr('x', 20)
-  //   .attr('y', season_summary_height / 3 + 65)
-  //   .text('fourth team')
 })
