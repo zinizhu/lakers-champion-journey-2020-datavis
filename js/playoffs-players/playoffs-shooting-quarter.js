@@ -133,6 +133,7 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .data(james_shooting_quarter)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-quarter-FG-' + i)
     .attr(
       'cx',
       d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2
@@ -140,11 +141,36 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .attr('cy', d => shooting_quarter_pct_y(d.FG_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.LAKERS_PURPLE)
+    .on('mouseover', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_PURPLE)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  james_shooting_quarter_svg
+    .selectAll('james-FGPCT-text')
+    .data(james_shooting_quarter)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-quarter-FG-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2 - 15
+    )
+    .attr('y', d => shooting_quarter_pct_y(d.FG_PCT) - 15)
+    .text(d => (d.FG_PCT * 100).toFixed(2) + '%')
+    .attr('font-size', 14)
+    .attr('display', 'none')
 
   // append FG3_PCT
   james_shooting_quarter_svg
     .append('path')
-    .datum(james_shooting_quarter) // .data vs .datum: former allows multiple append, later allows 1
+    .datum(james_shooting_quarter)
     .attr('fill', 'none')
     .attr('stroke', COLOR.RED)
     .attr('stroke-width', 2)
@@ -161,6 +187,7 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .data(james_shooting_quarter)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-quarter-FG3-' + i)
     .attr(
       'cx',
       d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2
@@ -168,6 +195,31 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .attr('cy', d => shooting_quarter_pct_y(d.FG3_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.RED)
+    .on('mouseover', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.RED)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  james_shooting_quarter_svg
+    .selectAll('james-FG3PCT-text')
+    .data(james_shooting_quarter)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-quarter-FG3-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2 - 25
+    )
+    .attr('y', d => shooting_quarter_pct_y(d.FG3_PCT) + 20)
+    .text(d => (d.FG3_PCT * 100).toFixed(2) + '%')
+    .attr('font-size', 14)
+    .attr('display', 'none')
 
   james_shooting_quarter_svg
     .append('text')
@@ -207,7 +259,7 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
   // append FG_PCT
   davis_shooting_quarter_svg
     .append('path')
-    .datum(davis_shooting_quarter) // .data vs .datum: former allows multiple append, later allows 1
+    .datum(davis_shooting_quarter)
     .attr('fill', 'none')
     .attr('stroke', COLOR.LAKERS_PURPLE)
     .attr('stroke-width', 2)
@@ -224,6 +276,7 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .data(davis_shooting_quarter)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-quarter-FG-' + i)
     .attr(
       'cx',
       d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2
@@ -231,11 +284,36 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .attr('cy', d => shooting_quarter_pct_y(d.FG_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.LAKERS_PURPLE)
+    .on('mouseover', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_PURPLE)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  davis_shooting_quarter_svg
+    .selectAll('davis-FGPCT-text')
+    .data(davis_shooting_quarter)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-quarter-FG-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2 - 15
+    )
+    .attr('y', d => shooting_quarter_pct_y(d.FG_PCT) - 15)
+    .text(d => (d.FG_PCT * 100).toFixed(2) + '%')
+    .attr('font-size', 14)
+    .attr('display', 'none')
 
   // FG3
   davis_shooting_quarter_svg
     .append('path')
-    .datum(davis_shooting_quarter) // .data vs .datum: former allows multiple append, later allows 1
+    .datum(davis_shooting_quarter)
     .attr('fill', 'none')
     .attr('stroke', COLOR.RED)
     .attr('stroke-width', 2)
@@ -252,6 +330,7 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .data(davis_shooting_quarter)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-quarter-FG3-' + i)
     .attr(
       'cx',
       d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2
@@ -259,6 +338,31 @@ d3.csv('./files/james_davis_shooting_quarter.csv', data => {
     .attr('cy', d => shooting_quarter_pct_y(d.FG3_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.RED)
+    .on('mouseover', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function () {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.RED)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  davis_shooting_quarter_svg
+    .selectAll('davis-FG3PCT-text')
+    .data(davis_shooting_quarter)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-quarter-FG3-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_quarter_x(d.type) + shooting_quarter_x.bandwidth() / 2 - 25
+    )
+    .attr('y', d => shooting_quarter_pct_y(d.FG3_PCT) + 20)
+    .text(d => (d.FG3_PCT * 100).toFixed(2) + '%')
+    .attr('font-size', 14)
+    .attr('display', 'none')
 
   davis_shooting_quarter_svg
     .append('text')

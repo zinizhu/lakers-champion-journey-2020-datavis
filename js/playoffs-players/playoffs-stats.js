@@ -46,6 +46,7 @@ d3.csv('./files/james_stats_summary.csv', data => {
       .data(data)
       .enter()
       .append('rect')
+      .attr('class', d => 'player-playoffs-rect-' + d.SEASON + '-' + dimension)
       .attr('x', (d, c) => 60 * c + 10)
       .attr('y', d => small_multiples_y_scales[i](+d[dimension]))
       .attr('width', 45)
@@ -60,6 +61,16 @@ d3.csv('./files/james_stats_summary.csv', data => {
           return COLOR.LAKERS_PURPLE
         }
         return COLOR.LIGHT_GREY
+      })
+      .on('mouseover', function () {
+        var className = '.' + d3.select(this).attr('class')
+        d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      })
+      .on('mouseleave', function (d) {
+        var className = '.' + d3.select(this).attr('class')
+        var color =
+          d.SEASON === 'playoffs' ? COLOR.LAKERS_PURPLE : COLOR.LIGHT_GREY
+        d3.selectAll(className).attr('fill', color)
       })
 
     d3.select('.james-bar-' + dimension)
@@ -161,6 +172,9 @@ d3.csv('./files/davis_stats_summary.csv', data => {
         ')'
     )
 
+  var temp = data[0]
+  data[0] = data[1]
+  data[1] = temp
   for (var i = 0; i < small_multiples_dimensions.length; i++) {
     var dimension = small_multiples_dimensions[i]
     d3.select('.davis-bar-' + dimension)
@@ -168,6 +182,7 @@ d3.csv('./files/davis_stats_summary.csv', data => {
       .data(data)
       .enter()
       .append('rect')
+      .attr('class', d => 'player-playoffs-rect-' + d.SEASON + '-' + dimension)
       .attr('x', (d, c) => 60 * c + 10)
       .attr('y', d => small_multiples_y_scales[i](+d[dimension]))
       .attr('width', 45)
@@ -182,6 +197,16 @@ d3.csv('./files/davis_stats_summary.csv', data => {
           return COLOR.LAKERS_PURPLE
         }
         return COLOR.LIGHT_GREY
+      })
+      .on('mouseover', function () {
+        var className = '.' + d3.select(this).attr('class')
+        d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      })
+      .on('mouseleave', function (d) {
+        var className = '.' + d3.select(this).attr('class')
+        var color =
+          d.SEASON === 'playoffs' ? COLOR.LAKERS_PURPLE : COLOR.LIGHT_GREY
+        d3.selectAll(className).attr('fill', color)
       })
 
     d3.select('.davis-bar-' + dimension)

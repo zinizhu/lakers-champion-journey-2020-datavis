@@ -130,10 +130,36 @@ d3.csv('./files/james_davis_shooting_dist.csv', data => {
     .data(james_shooting_dist)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-dist-' + i)
     .attr('cx', d => shooting_dist_x(d.type) + shooting_dist_x.bandwidth() / 2)
     .attr('cy', d => shooting_dist_pct_y(d.FG_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.LAKERS_YELLOW)
+    .on('mouseover', function() {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_PURPLE)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function() {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  james_shooting_dist_svg
+    .selectAll('james-FGPCT-text')
+    .data(james_shooting_dist)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-dist-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_dist_x(d.type) + shooting_dist_x.bandwidth() / 2 - 15
+    )
+    .attr('y', d => shooting_dist_pct_y(d.FG_PCT) - 15)
+    .text(d => (d.FG_PCT * 100).toFixed(2) + '%')
+    .style('font-size', 13)
+    .attr('display', 'none')
 
   james_shooting_dist_svg
     .append('text')
@@ -180,10 +206,36 @@ d3.csv('./files/james_davis_shooting_dist.csv', data => {
     .data(davis_shooting_dist)
     .enter()
     .append('circle')
+    .attr('class', (d, i) => 'shooting-dist-' + i)
     .attr('cx', d => shooting_dist_x(d.type) + shooting_dist_x.bandwidth() / 2)
     .attr('cy', d => shooting_dist_pct_y(d.FG_PCT))
     .attr('r', 4)
     .attr('fill', COLOR.LAKERS_YELLOW)
+    .on('mouseover', function() {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_PURPLE)
+      d3.selectAll(className + '-text').attr('display', 'block')
+    })
+    .on('mouseleave', function() {
+      var className = '.' + d3.select(this).attr('class')
+      d3.selectAll(className).attr('fill', COLOR.LAKERS_YELLOW)
+      d3.selectAll(className + '-text').attr('display', 'none')
+    })
+
+  davis_shooting_dist_svg
+    .selectAll('davis-FGPCT-text')
+    .data(davis_shooting_dist)
+    .enter()
+    .append('text')
+    .attr('class', (d, i) => 'shooting-dist-' + i + '-text')
+    .attr(
+      'x',
+      d => shooting_dist_x(d.type) + shooting_dist_x.bandwidth() / 2 - 15
+    )
+    .attr('y', d => shooting_dist_pct_y(d.FG_PCT) - 15)
+    .text(d => (d.FG_PCT * 100).toFixed(2) + '%')
+    .style('font-size', 13)
+    .attr('display', 'none')
 
   davis_shooting_dist_svg
     .append('text')
