@@ -355,6 +355,14 @@ d3.csv('./files/lakers_players_performance.csv', data => {
   }
 
   lakers_players_legends
+    .append('text')
+    .attr('x', 5)
+    .attr('y', season_summary_height / 3 - 15)
+    .text('*click on circle to highlight each group')
+    .style('fill', COLOR.DARK_GREY)
+    .style('font-size', 10)
+
+  lakers_players_legends
     .selectAll('lakers-player-summary-legends-text')
     .data(legends)
     .enter()

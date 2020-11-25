@@ -58,7 +58,6 @@ body {
 
 .div-half {
   width: 800px;
-
 }
 
 .left-space {
@@ -270,7 +269,6 @@ body {
   margin-bottom: 30px;
 }
 
-
 /* page5 - playoffs */
 #lakers-playoffs-general-stats {
   margin-top: 50px;
@@ -303,3 +301,22 @@ body {
 }
 
 /* page6 LBJ & AD */
+.moments-fixed {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 100px;
+  z-index: 1;
+}
+
+#big-moments-img-div {
+  margin-top: 80px;
+  display: block;
+  text-align: center;
+}
+
+#lakers-cover {
+  margin: auto;
+  width: 800px;
+  height: auto;
+}

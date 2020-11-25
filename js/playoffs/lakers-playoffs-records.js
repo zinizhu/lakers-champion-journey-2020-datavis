@@ -104,6 +104,35 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
       .range([10, playoffs_records_width - 10])
       .domain([0, 6])
 
+    // legend
+    playoffs_records
+      .append('circle')
+      .attr('cx', 10)
+      .attr('cy', 15)
+      .attr('r', 4)
+      .attr('fill', COLOR.GREEN)
+
+    playoffs_records
+      .append('text')
+      .attr('x', 30)
+      .attr('y', 20)
+      .text('WIN')
+      .attr('font-size', 12)
+
+    playoffs_records
+      .append('circle')
+      .attr('cx', 80)
+      .attr('cy', 15)
+      .attr('r', 4)
+      .attr('fill', COLOR.RED)
+
+    playoffs_records
+      .append('text')
+      .attr('x', 100)
+      .attr('y', 20)
+      .text('LOSE')
+      .attr('font-size', 12)
+
     // for each round, draw circles
     for (var idx = 0; idx < 4; idx++) {
       playoffs_records
