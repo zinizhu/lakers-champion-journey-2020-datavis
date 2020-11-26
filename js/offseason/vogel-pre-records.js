@@ -114,7 +114,7 @@ new Waypoint({
       })
       .attr('fill', (d, c) => vogel_pre_pie_color[c])
   },
-  offset: 800
+  offset: 700
 })
 
 for (var i = 0; i < 2; i++) {
