@@ -127,46 +127,46 @@ d3.csv('./files/lakers_game_logs.csv', data => {
           })
 
         logs.on('mouseover', highlight).on('mouseleave', doNotHighlight)
+
+        // draw text
+        var texts = seasonLogs
+          .selectAll('text')
+          .data(data)
+          .enter()
+          .append('text')
+          .attr('class', d => 'season-log-text-' + d.GAME_ID)
+          .attr('x', (d, i) => x(i))
+          .attr('y', d => {
+            if (d.DIFF < 0) {
+              return y(d.DIFF) + 20
+            }
+            return y(d.DIFF) - 8
+          })
+
+        texts
+          .append('tspan')
+          .attr('class', d => 'season-log-text-' + d.GAME_ID)
+          .attr('dx', -20)
+          .attr('dy', d => {
+            if (d.DIFF < 0) return -5
+            return -15
+          })
+          .text(d => d.MATCHUP)
+          .style('font-size', '10')
+          .style('text-color', COLOR.DARK_GREY)
+          .style('display', 'none')
+
+        texts
+          .append('tspan')
+          .attr('class', d => 'season-log-text-' + d.GAME_ID)
+          .attr('dx', -45)
+          .attr('dy', 15)
+          .text(d => d.PTS + ':' + d.OPP_PTS)
+          .style('font-size', '10')
+          .style('text-color', COLOR.DARK_GREY)
+          .style('display', 'none')
       }
     },
     offset: 800
   })
-
-  // draw text
-  var texts = seasonLogs
-    .selectAll('text')
-    .data(data)
-    .enter()
-    .append('text')
-    .attr('class', d => 'season-log-text-' + d.GAME_ID)
-    .attr('x', (d, i) => x(i))
-    .attr('y', d => {
-      if (d.DIFF < 0) {
-        return y(d.DIFF) + 20
-      }
-      return y(d.DIFF) - 8
-    })
-
-  texts
-    .append('tspan')
-    .attr('class', d => 'season-log-text-' + d.GAME_ID)
-    .attr('dx', -20)
-    .attr('dy', d => {
-      if (d.DIFF < 0) return -5
-      return -15
-    })
-    .text(d => d.MATCHUP)
-    .style('font-size', '10')
-    .style('text-color', COLOR.DARK_GREY)
-    .style('display', 'none')
-
-  texts
-    .append('tspan')
-    .attr('class', d => 'season-log-text-' + d.GAME_ID)
-    .attr('dx', -45)
-    .attr('dy', 15)
-    .text(d => d.PTS + ':' + d.OPP_PTS)
-    .style('font-size', '10')
-    .style('text-color', COLOR.DARK_GREY)
-    .style('display', 'none')
 })
