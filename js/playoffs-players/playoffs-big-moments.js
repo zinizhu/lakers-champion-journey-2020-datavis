@@ -108,7 +108,6 @@ var big_moments_svg = big_moments_root
   )
 
 d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
-  console.log(data)
   data.sort((a, b) => a.GAME_ID.localeCompare(b.GAME_ID))
 
   // y axis

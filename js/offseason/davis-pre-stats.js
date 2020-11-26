@@ -117,7 +117,6 @@ var davis_pre_stats_single_height = 180
 
 // small multiples stats
 d3.csv('./files/davis-pre-la-career.csv', data => {
-  console.log(data)
   var davis_pre_stats_dimensions = ['PTS', 'REB', 'BLK', 'FG']
   var davis_pre_stats_years = []
   data.forEach(row => {

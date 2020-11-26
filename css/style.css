@@ -315,3 +315,26 @@ body {
   width: 800px;
   height: auto;
 }
+
+.reference {
+  margin: 50px 500px;
+  display: block;
+  text-align: left;
+}
+
+.reference li {
+  font-size: 18px;
+  color: var(--DARK_GREY);
+}
+
+a:link {
+  color: var(--LIGHT_GREY);
+}
+
+a:hover {
+  color: var(--LIGHT_GREY);
+}
+
+a:visited {
+  color: var(--DARK_GREY);
+}

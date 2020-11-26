@@ -31,7 +31,6 @@ var vogel_pre_figures = []
 vogel_pre_figures_raw.forEach(row => {
   vogel_pre_figures.push(vogel_pre_pie_scale(d3.entries(row)))
 })
-console.log(vogel_pre_figures)
 
 var vogel_pre_pies = d3
   .select('#vogel-pre-pies')
