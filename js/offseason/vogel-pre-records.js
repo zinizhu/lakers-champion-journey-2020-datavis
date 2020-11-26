@@ -26,7 +26,7 @@ var vogel_pre_figures_raw = [
   vogel_pre_playoff,
   vogel_pre_exp
 ]
-// var vogel_pre_figures_raw = [vogel_pre_regular, vogel_pre_playoff]
+
 var vogel_pre_figures = []
 vogel_pre_figures_raw.forEach(row => {
   vogel_pre_figures.push(vogel_pre_pie_scale(d3.entries(row)))

@@ -60,10 +60,6 @@ body {
   width: 800px;
 }
 
-.left-space {
-  margin-left: 100px;
-}
-
 /* section */
 .section-title {
   padding-top: 40px;
@@ -91,7 +87,6 @@ body {
 #page-1 {
   display: block;
   text-align: center;
-  /* padding: 3%; */
 }
 
 #page-1-title h1 {

@@ -14,7 +14,6 @@ var games = [
 ]
 
 for (var i = 0, length = pageElements.length; i < length; i++) {
-
   new Waypoint({
     element: pageElements.item(i),
     handler: function (direction) {
@@ -31,7 +30,6 @@ for (var i = 0, length = pageElements.length; i < length; i++) {
           var prevRectClass = '.season-log-' + games[order - 1].id
           d3.selectAll(prevRectClass).style('fill', games[order - 1].fill)
         }
-
       } else {
         this.element.classList.remove('text-show')
         if (order === 0) {
@@ -44,13 +42,11 @@ for (var i = 0, length = pageElements.length; i < length; i++) {
           // set back prev
           var prevRectClass = '.season-log-' + games[order - 1].id
           d3.selectAll(prevRectClass).style('fill', 'red')
-
         }
       }
     },
-    offset:500
+    offset: 500
   })
-
 
   new Waypoint({
     element: pageElements.item(i),

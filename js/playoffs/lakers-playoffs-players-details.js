@@ -36,8 +36,6 @@ var playoffs_players_stats_by_game = { POR: {}, HOU: {}, DEN: {}, MIA: {} }
 var playoffs_players_names_by_game = { POR: {}, HOU: {}, DEN: {}, MIA: {} }
 
 d3.csv('./files/lakers_playoffs_players_logs.csv', data => {
-  // console.log(data)
-
   // generate axes
   var playoffs_players_axis_end = []
   var playoffs_players_label_end = []
@@ -144,14 +142,23 @@ d3.csv('./files/lakers_playoffs_players_logs.csv', data => {
     var game_name = row.Name + '-' + row.Game_ID
     var current_game_log_arr = []
     for (var i = 0; i < playoffs_players_stats_dimension.length + 1; i++) {
-      
       var j = i % playoffs_players_stats_dimension.length
       var stat = +row[playoffs_players_stats_dimension[j]]
       current_game_log_arr.push({
         x: playoffs_players_stats_scales_x[j](stat),
         y: playoffs_players_stats_scales_y[j](stat),
-        text_x: playoffs_players_stats_scales_x[j](Math.min(stat + playoffs_players_stats_scales_max[i % 6] / 8, playoffs_players_stats_scales_max[i % 6])),
-        text_y: playoffs_players_stats_scales_y[j](Math.min(stat + playoffs_players_stats_scales_max[i % 6] / 8, playoffs_players_stats_scales_max[i % 6])),
+        text_x: playoffs_players_stats_scales_x[j](
+          Math.min(
+            stat + playoffs_players_stats_scales_max[i % 6] / 8,
+            playoffs_players_stats_scales_max[i % 6]
+          )
+        ),
+        text_y: playoffs_players_stats_scales_y[j](
+          Math.min(
+            stat + playoffs_players_stats_scales_max[i % 6] / 8,
+            playoffs_players_stats_scales_max[i % 6]
+          )
+        ),
         stats: stat
       })
     }

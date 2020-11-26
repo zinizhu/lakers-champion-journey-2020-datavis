@@ -192,7 +192,6 @@ d3.csv('./files/lakers_players_performance.csv', data => {
     .data(lakers_players_performance)
     .enter()
     .append('path')
-    // .attr('class', d => 'lakers-players-summary-path lakers-players-summary-' + d.name.split(' ')[0])
     .attr('class', d => {
       var team = ''
       if (first_team.includes(d.name)) {

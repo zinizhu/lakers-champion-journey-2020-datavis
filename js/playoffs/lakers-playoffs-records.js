@@ -210,8 +210,6 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
         .attr('font-size', 12)
         .attr('fill', COLOR.DARK_GREY)
 
-      console.log(gameDetails)
-
       playoffs_deatails_oppo
         .selectAll('playoffs-oppo-game-details-texts')
         .data(oppoGameDetails)

@@ -32,7 +32,6 @@ var datas_pre_figures = []
 datas_pre_figures_raw.forEach(row => {
   datas_pre_figures.push(davis_pre_pie_scale(d3.entries(row)))
 })
-console.log(datas_pre_figures)
 
 var davis_pre_pies = d3
   .select('#davis-pre-pies')
@@ -254,36 +253,6 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
           .tickSize(2)
       )
 
-    // add path
-    // var currPath = d3
-    //   .select('.davis-pre-' + dimension)
-    //   .append('path')
-    //   .datum(data)
-    //   .attr('fill', 'none')
-    //   .attr('stroke', davis_pre_stats_colors[i])
-    //   .attr('stroke-width', 2)
-    //   .attr(
-    //     'd',
-    //     d3
-    //       .line()
-    //       .x(
-    //         d =>
-    //           davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
-    //           davis_pre_stats_x.bandwidth() / 2
-    //       )
-    //       .y(d => davis_pre_stats_y[i](d[dimension]))
-    //   )
-
-    // var len = currPath.node().getTotalLength()
-
-    // currPath
-    //   .attr('stroke-dasharray', len + ' ' + len)
-    //   .attr('stroke-dashoffset', len)
-    //   .transition()
-    //   .duration(1500)
-    //   .ease(d3.easeLinear)
-    //   .attr('stroke-dashoffset', 0)
-
     // add lines
     d3.select('.davis-pre-' + dimension)
       .selectAll('davis-pre-stats-line-' + dimension)
@@ -338,8 +307,6 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
         var index = +className.substring(className.length - 1)
         var textClass =
           '.davis-pre-text-' +
-          // davis_pre_stats_dimensions[index] +
-          // '-' +
           d['Season'].substring(d['Season'].length - 5)
         d3.selectAll(this).attr('fill', COLOR.LAKERS_PURPLE)
         d3.selectAll(textClass).attr('display', 'block')
@@ -358,8 +325,6 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
           d['Season']
         var textClass =
           '.davis-pre-text-' +
-          // davis_pre_stats_dimensions[index] +
-          // '-' +
           d['Season'].substring(d['Season'].length - 5)
         d3.selectAll(this).attr('fill', davis_pre_stats_colors[index])
         d3.selectAll(textClass).attr('display', 'none')
@@ -376,8 +341,6 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
         'class',
         d =>
           'davis-pre-text-' +
-          // dimension +
-          // '-' +
           d['Season'].substring(d['Season'].length - 5)
       )
       .attr(

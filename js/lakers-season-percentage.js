@@ -55,7 +55,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
 
   seasonPercentage
     .append('path')
-    .datum(data) // .data vs .datum: former allows multiple append, later allows 1
+    .datum(data)
     .attr('fill', 'none')
     .attr('stroke', COLOR.LAKERS_PURPLE)
     .attr('stroke-width', 2)
@@ -69,7 +69,7 @@ d3.csv('./files/lakers_game_logs.csv', data => {
 
   seasonPercentage
     .append('path')
-    .datum(data) // .data vs .datum: former allows multiple append, later allows 1
+    .datum(data)
     .attr('fill', 'none')
     .attr('stroke', COLOR.RED)
     .attr('stroke-width', 2)

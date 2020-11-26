@@ -129,35 +129,8 @@ d3.csv('./files/lakers_game_logs.csv', data => {
         logs.on('mouseover', highlight).on('mouseleave', doNotHighlight)
       }
     },
-    offset: 700
+    offset: 800
   })
-
-  // draw rects
-  // seasonLogs
-  //   .selectAll('rect')
-  //   .data(data)
-  //   .enter()
-  //   .append('rect')
-  //   .attr('class', d => 'season-log-' + d.GAME_ID)
-  //   .attr('x', (d, i) => x(i))
-  //   .attr('y', d => {
-  //     if (d.DIFF < 0) {
-  //       return y(0)
-  //     }
-  //     return y(d.DIFF)
-  //   })
-  //   .transition()
-  //   .duration(1000)
-  //   .attr('width', x.bandwidth())
-  //   .attr('height', d => Math.abs(y(d.DIFF) - y(0)))
-  //   .attr('fill', d => {
-  //     if (d.DIFF < 0) {
-  //       return COLOR.DARK_GREY
-  //     }
-  //     return COLOR.LAKERS_YELLOW
-  //   })
-  //   .on('mouseover', highlight)
-  //   .on('mouseleave', doNotHighlight)
 
   // draw text
   var texts = seasonLogs

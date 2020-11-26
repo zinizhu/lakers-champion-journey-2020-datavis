@@ -98,13 +98,13 @@ d3.csv('./files/all_team_performance.csv', data => {
     d3.selectAll(textClass).style('display', 'none')
   }
 
-  var season_rank_title = seasonPTSRank
+  seasonPTSRank
     .append('text')
     .attr('x', 0)
     .attr('y', 20)
     .text('Team PPG Ranking')
 
-  var season_rank_bars = seasonPTSRank
+  seasonPTSRank
     .selectAll('season-rank-bar')
     .data(all_team_PTS)
     .enter()
@@ -124,7 +124,7 @@ d3.csv('./files/all_team_performance.csv', data => {
     .on('mouseleave', season_rank_bar_doNotHighlight)
 
   // text
-  var season_rank_text = seasonPTSRank
+  seasonPTSRank
     .selectAll('season-rank-text')
     .data(all_team_PTS)
     .enter()
