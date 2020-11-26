@@ -60,21 +60,65 @@ var vogel_pre_pies = d3
       ')'
   )
 
-for (var i = 0; i < 2; i++) {
-  d3.select('.vogel-pre-pie-' + i)
-    .selectAll('vogel_pre_fg_slice')
-    .data(vogel_pre_figures[i])
-    .enter()
-    .append('path')
-    .attr(
-      'd',
-      d3
-        .arc()
-        .innerRadius(vogel_pre_pie_inner_radius)
-        .outerRadius(vogel_pre_pie_outer_radius)
-    )
-    .attr('fill', (d, c) => vogel_pre_pie_color[c])
+new Waypoint({
+  element: document.getElementById('vogel-pre-pies'),
+  handler: function (direction) {
+    d3.select('.vogel-pre-pie-0')
+      .selectAll('vogel_pre_fg_slice')
+      .data(vogel_pre_figures[0])
+      .enter()
+      .append('path')
+      .transition()
+      .delay(function (d, i) {
+        return i * 500
+      })
+      .duration(500)
+      .attrTween('d', function (d) {
+        var i = d3.interpolate(d.startAngle + 0.1, d.endAngle)
+        return function (t) {
+          d.endAngle = i(t)
+          var arc = d3
+            .arc()
+            .innerRadius(vogel_pre_pie_inner_radius)
+            .outerRadius(vogel_pre_pie_outer_radius)
+          return arc(d)
+        }
+      })
+      .attr('fill', (d, c) => vogel_pre_pie_color[c])
+  },
+  offset: 700
+})
 
+new Waypoint({
+  element: document.getElementById('vogel-pre-pies'),
+  handler: function (direction) {
+    d3.select('.vogel-pre-pie-1')
+      .selectAll('vogel_pre_fg_slice')
+      .data(vogel_pre_figures[1])
+      .enter()
+      .append('path')
+      .transition()
+      .delay(function (d, i) {
+        return i * 500
+      })
+      .duration(500)
+      .attrTween('d', function (d) {
+        var i = d3.interpolate(d.startAngle + 0.1, d.endAngle)
+        return function (t) {
+          d.endAngle = i(t)
+          var arc = d3
+            .arc()
+            .innerRadius(vogel_pre_pie_inner_radius)
+            .outerRadius(vogel_pre_pie_outer_radius)
+          return arc(d)
+        }
+      })
+      .attr('fill', (d, c) => vogel_pre_pie_color[c])
+  },
+  offset: 800
+})
+
+for (var i = 0; i < 2; i++) {
   var legend = 'win%'
   d3.select('.vogel-pre-pie-' + i)
     .append('text')

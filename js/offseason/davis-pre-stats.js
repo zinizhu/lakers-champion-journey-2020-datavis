@@ -61,21 +61,38 @@ var davis_pre_pies = d3
       ')'
   )
 
-for (var i = 0; i < 4; i++) {
-  d3.select('.davis-pre-pie-' + i)
-    .selectAll('davis_pre_fg_slice')
-    .data(datas_pre_figures[i])
-    .enter()
-    .append('path')
-    .attr(
-      'd',
-      d3
-        .arc()
-        .innerRadius(davis_pre_pie_inner_radius)
-        .outerRadius(davis_pre_pie_outer_radius)
-    )
-    .attr('fill', (d, c) => davis_pre_pie_color[c])
+new Waypoint({
+  element: document.getElementById('davis-pre-stats-small-multiples'),
+  handler: function (direction) {
+    for (var j = 0; j < 4; j++) {
+      d3.select('.davis-pre-pie-' + j)
+        .selectAll('davis_pre_fg_slice')
+        .data(datas_pre_figures[j])
+        .enter()
+        .append('path')
+        .transition()
+        .delay(function (d, i) {
+          return i * 500
+        })
+        .duration(500)
+        .attrTween('d', function (d) {
+          var i = d3.interpolate(d.startAngle + 0.1, d.endAngle)
+          return function (t) {
+            d.endAngle = i(t)
+            var arc = d3
+              .arc()
+              .innerRadius(davis_pre_pie_inner_radius)
+              .outerRadius(davis_pre_pie_outer_radius)
+            return arc(d)
+          }
+        })
+        .attr('fill', (d, c) => davis_pre_pie_color[c])
+    }
+  },
+  offset: 800
+})
 
+for (var i = 0; i < 4; i++) {
   d3.select('.davis-pre-pie-' + i)
     .append('text')
     .attr('x', -0)
@@ -95,7 +112,7 @@ for (var i = 0; i < 4; i++) {
 }
 
 // define margin and svg size
-var davis_pre_stats_margin = { top: 10, bottom: 30, left: 20, right: 20 }
+var davis_pre_stats_margin = { top: 10, bottom: 30, left: 20, right: 40 }
 var davis_pre_stats_single_width = 200
 var davis_pre_stats_single_height = 180
 
@@ -175,6 +192,47 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
     COLOR.RED,
     COLOR.GREEN
   ]
+
+  new Waypoint({
+    element: document.getElementById('davis-pre-stats-small-multiples'),
+    handler: function (direction) {
+      for (var j = 0; j < 4; j++) {
+        var dimension = davis_pre_stats_dimensions[j]
+        var currPath = d3
+          .select('.davis-pre-' + dimension)
+          .append('path')
+          .datum(data)
+          .attr('fill', 'none')
+          .attr('stroke', davis_pre_stats_colors[j])
+          .attr('stroke-width', 2)
+          .attr(
+            'd',
+            d3
+              .line()
+              .x(
+                d =>
+                  davis_pre_stats_x(
+                    d['Season'].substring(d['Season'].length - 5)
+                  ) +
+                  davis_pre_stats_x.bandwidth() / 2
+              )
+              .y(d => davis_pre_stats_y[j](d[dimension]))
+          )
+
+        var len = currPath.node().getTotalLength()
+
+        currPath
+          .attr('stroke-dasharray', len + ' ' + len)
+          .attr('stroke-dashoffset', len)
+          .transition()
+          .duration(1000)
+          .ease(d3.easeLinear)
+          .attr('stroke-dashoffset', 0)
+      }
+    },
+    offset: 800
+  })
+
   for (var i = 0; i < davis_pre_stats_dimensions.length; i++) {
     var dimension = davis_pre_stats_dimensions[i]
     d3.select('.davis-pre-' + dimension)
@@ -197,34 +255,59 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
       )
 
     // add path
-    var currPath = d3
-      .select('.davis-pre-' + dimension)
-      .append('path')
-      .datum(data)
-      .attr('fill', 'none')
-      .attr('stroke', davis_pre_stats_colors[i])
-      .attr('stroke-width', 2)
+    // var currPath = d3
+    //   .select('.davis-pre-' + dimension)
+    //   .append('path')
+    //   .datum(data)
+    //   .attr('fill', 'none')
+    //   .attr('stroke', davis_pre_stats_colors[i])
+    //   .attr('stroke-width', 2)
+    //   .attr(
+    //     'd',
+    //     d3
+    //       .line()
+    //       .x(
+    //         d =>
+    //           davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
+    //           davis_pre_stats_x.bandwidth() / 2
+    //       )
+    //       .y(d => davis_pre_stats_y[i](d[dimension]))
+    //   )
+
+    // var len = currPath.node().getTotalLength()
+
+    // currPath
+    //   .attr('stroke-dasharray', len + ' ' + len)
+    //   .attr('stroke-dashoffset', len)
+    //   .transition()
+    //   .duration(1500)
+    //   .ease(d3.easeLinear)
+    //   .attr('stroke-dashoffset', 0)
+
+    // add lines
+    d3.select('.davis-pre-' + dimension)
+      .selectAll('davis-pre-stats-line-' + dimension)
+      .data(data)
+      .enter()
+      .append('line')
+      .attr('class', d => 'davis-pre-line-circle-' + d['Season'])
+      .style('stroke', COLOR.LIGHT_GREY)
+      .style('stroke-width', 1)
       .attr(
-        'd',
-        d3
-          .line()
-          .x(
-            d =>
-              davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
-              davis_pre_stats_x.bandwidth() / 2
-          )
-          .y(d => davis_pre_stats_y[i](d[dimension]))
+        'x1',
+        d =>
+          davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
+          davis_pre_stats_x.bandwidth() / 2
       )
-
-    var len = currPath.node().getTotalLength()
-
-    currPath
-      .attr('stroke-dasharray', len + ' ' + len)
-      .attr('stroke-dashoffset', len)
-      .transition()
-      .duration(1500)
-      .ease(d3.easeLinear)
-      .attr('stroke-dashoffset', 0)
+      .attr('y1', 0)
+      .attr(
+        'x2',
+        d =>
+          davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
+          davis_pre_stats_x.bandwidth() / 2
+      )
+      .attr('y2', davis_pre_stats_single_height)
+      .attr('display', 'none')
 
     // add circles
     d3.select('.davis-pre-' + dimension)
@@ -244,25 +327,43 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
       .attr('fill', davis_pre_stats_colors[i])
       .on('mouseover', function (d) {
         var className = d3.select(this).attr('class')
+        var len = d3.select(this).attr('class').length
+        var lineClassName =
+          '.' +
+          d3
+            .select(this)
+            .attr('class')
+            .substring(0, len - 1) +
+          d['Season']
         var index = +className.substring(className.length - 1)
         var textClass =
           '.davis-pre-text-' +
-          davis_pre_stats_dimensions[index] +
-          '-' +
+          // davis_pre_stats_dimensions[index] +
+          // '-' +
           d['Season'].substring(d['Season'].length - 5)
-        d3.select(this).attr('fill', COLOR.LAKERS_PURPLE)
-        d3.select(textClass).attr('display', 'block')
+        d3.selectAll(this).attr('fill', COLOR.LAKERS_PURPLE)
+        d3.selectAll(textClass).attr('display', 'block')
+        d3.selectAll(lineClassName).attr('display', 'block')
       })
       .on('mouseleave', function (d) {
         var className = d3.select(this).attr('class')
         var index = +className.substring(className.length - 1)
+        var len = d3.select(this).attr('class').length
+        var lineClassName =
+          '.' +
+          d3
+            .select(this)
+            .attr('class')
+            .substring(0, len - 1) +
+          d['Season']
         var textClass =
           '.davis-pre-text-' +
-          davis_pre_stats_dimensions[index] +
-          '-' +
+          // davis_pre_stats_dimensions[index] +
+          // '-' +
           d['Season'].substring(d['Season'].length - 5)
-        d3.select(this).attr('fill', davis_pre_stats_colors[index])
-        d3.select(textClass).attr('display', 'none')
+        d3.selectAll(this).attr('fill', davis_pre_stats_colors[index])
+        d3.selectAll(textClass).attr('display', 'none')
+        d3.selectAll(lineClassName).attr('display', 'none')
       })
 
     // add text
@@ -275,18 +376,24 @@ d3.csv('./files/davis-pre-la-career.csv', data => {
         'class',
         d =>
           'davis-pre-text-' +
-          dimension +
-          '-' +
+          // dimension +
+          // '-' +
           d['Season'].substring(d['Season'].length - 5)
       )
       .attr(
         'x',
         d =>
           davis_pre_stats_x(d['Season'].substring(d['Season'].length - 5)) +
-          davis_pre_stats_x.bandwidth() / 2
+          davis_pre_stats_x.bandwidth() / 2 -
+          12
       )
       .attr('y', d => davis_pre_stats_y[i](d[dimension]) - 20)
-      .text(d => d[dimension])
+      .text(d => {
+        if (dimension === 'FG') {
+          return (d[dimension] * 100).toFixed(2) + '%'
+        }
+        return d[dimension]
+      })
       .attr('display', 'none')
 
     // add labels

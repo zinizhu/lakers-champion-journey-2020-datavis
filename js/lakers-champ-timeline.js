@@ -40,46 +40,61 @@ d3.csv('./files/lakers_champ.csv', data => {
         .tickFormat(d3.format('d'))
     )
 
-  d3.selectAll('.lakers-champ-axis .tick line')
-    .attr('y2', (d, i) => {
-      if (d == 2020) return -60
-      if (i % 2 === 0) {
-        return -40
+  new Waypoint({
+    element: document.getElementById('lakers-champ-timeline'),
+    handler: function (direction) {
+      if (this.element.getAttribute('done') != 1 && direction == 'down') {
+        this.element.setAttribute('done', 1)
+        d3.selectAll('.lakers-champ-axis .tick line')
+          .transition()
+          .duration(1000)
+          .attr('y2', (d, i) => {
+            if (d == 2020) return -60
+            if (i % 2 === 0) {
+              return -40
+            }
+            return 40
+          })
+          .attr('stroke', COLOR.LIGHT_GREY)
+
+        d3.selectAll('.lakers-champ-axis .tick text')
+          .transition()
+          .duration(1000)
+          .attr('y', (d, i) => {
+            if (d == 2020) return -90
+            if (i % 2 === 0) {
+              return -70
+            }
+            return 60
+          })
+          .attr('font-size', 13)
+          .attr('fill', COLOR.DARK_GREY)
+
+        var ticks = d3.selectAll('.lakers-champ-axis .tick')
+        ticks.each(function (tick, i) {
+          d3.select(this)
+            .append('circle')
+            .transition()
+            .duration(1000)
+            .attr('cy', function (d) {
+              if (d == 2020) return -60
+              if (i % 2 === 0) {
+                return -40
+              }
+              return 40
+            })
+            .attr('r', 10)
+            .attr('fill', function (d) {
+              if (d === 2020) return COLOR.LAKERS_YELLOW
+              return COLOR.LAKERS_PURPLE
+            })
+        })
       }
-      return 40
-    })
-    .attr('stroke', COLOR.LIGHT_GREY)
+    },
+    offset: 700
+  })
 
   d3.selectAll('.lakers-champ-axis path').attr('stroke', COLOR.LIGHT_GREY)
-
-  d3.selectAll('.lakers-champ-axis .tick text')
-    .attr('y', (d, i) => {
-      if (d == 2020) return -90
-      if (i % 2 === 0) {
-        return -70
-      }
-      return 60
-    })
-    .attr('font-size', 13)
-    .attr('fill', COLOR.DARK_GREY)
-
-  var ticks = d3.selectAll('.lakers-champ-axis .tick')
-  ticks.each(function (tick, i) {
-    d3.select(this)
-      .append('circle')
-      .attr('cy', function (d) {
-        if (d == 2020) return -60
-        if (i % 2 === 0) {
-          return -40
-        }
-        return 40
-      })
-      .attr('r', 10)
-      .attr('fill', function (d) {
-        if (d === 2020) return COLOR.LAKERS_YELLOW
-        return COLOR.LAKERS_PURPLE
-      })
-  })
 
   // add image
   var champRecordsStories = [
@@ -90,10 +105,8 @@ d3.csv('./files/lakers_champ.csv', data => {
       y: -110,
       link: './files/images/champ-timeline/lakers-champ-gm.jpg',
       width: 100,
-      text1:
-        '1947–1958, George Mikan dominated the league ',
-      text2:
-        'and found Minneapolis dynasty.'
+      text1: '1947–1958, George Mikan dominated the league ',
+      text2: 'and found Minneapolis dynasty.'
     },
     {
       cx: x(1968),
@@ -102,10 +115,8 @@ d3.csv('./files/lakers_champ.csv', data => {
       y: 180,
       link: './files/images/champ-timeline/lakers-champ-wc.jpg',
       width: 120,
-      text1:
-        '1968–1973, Wilt Chamberlain set countless records,',
-      text2:
-        'but won only 1 championship.'
+      text1: '1968–1973, Wilt Chamberlain set countless records,',
+      text2: 'but won only 1 championship.'
     },
     {
       cx: x(1978),
@@ -124,7 +135,7 @@ d3.csv('./files/lakers_champ.csv', data => {
       y: 200,
       link: './files/images/champ-timeline/lakers-champ-ok.jpg',
       width: 120,
-      text1: '1996–2004, O\'Neal-Bryant dynasty and',
+      text1: "1996–2004, O'Neal-Bryant dynasty and",
       text2: 'the "three ring circus".'
     },
     {
@@ -159,13 +170,13 @@ d3.csv('./files/lakers_champ.csv', data => {
   lakers_champ_text
     .append('tspan')
     .attr('x', d => d.cx + 60)
-    .attr('y',  d => d.cy - 10)
+    .attr('y', d => d.cy - 10)
     .attr('font-size', '13px')
     .attr('fill', COLOR.DARK_GREY)
     .text(d => d.text1)
     .append('tspan')
     .attr('x', d => d.cx + 60)
-    .attr('y',  d => d.cy + 10)
+    .attr('y', d => d.cy + 10)
     .attr('font-size', '13px')
     .attr('fill', COLOR.DARK_GREY)
     .text(d => d.text2)
@@ -180,6 +191,4 @@ d3.csv('./files/lakers_champ.csv', data => {
     .attr('y', d => d.y)
     .attr('width', d => d.width)
     .attr('clip-path', (d, i) => 'url(#clipObj-' + i + ')')
-
-
 })

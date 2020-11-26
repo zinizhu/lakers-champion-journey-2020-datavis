@@ -92,34 +92,72 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     d3.selectAll(fg3PctClass)
       .attr('r', 3)
       .style('fill', COLOR.RED)
-      d3.selectAll(fgPctTextClass).style('display', 'none')
-      d3.selectAll(fg3PctTextClass).style('display', 'none')
+    d3.selectAll(fgPctTextClass).style('display', 'none')
+    d3.selectAll(fg3PctTextClass).style('display', 'none')
   }
 
+  new Waypoint({
+    element: document.getElementById('lakers-season-logs'),
+    handler: function (direction) {
+      if (direction === 'down') {
+        var logs = seasonLogs
+          .selectAll('rect')
+          .data(data)
+          .enter()
+          .append('rect')
+          .attr('class', d => 'season-log-' + d.GAME_ID)
+          .attr('x', (d, i) => x(i))
+          .attr('y', d => {
+            if (d.DIFF < 0) {
+              return y(0)
+            }
+            return y(d.DIFF)
+          })
+
+        logs
+          .transition()
+          .duration(1000)
+          .attr('width', x.bandwidth())
+          .attr('height', d => Math.abs(y(d.DIFF) - y(0)))
+          .attr('fill', d => {
+            if (d.DIFF < 0) {
+              return COLOR.DARK_GREY
+            }
+            return COLOR.LAKERS_YELLOW
+          })
+
+        logs.on('mouseover', highlight).on('mouseleave', doNotHighlight)
+      }
+    },
+    offset: 700
+  })
+
   // draw rects
-  seasonLogs
-    .selectAll('rect')
-    .data(data)
-    .enter()
-    .append('rect')
-    .attr('class', d => 'season-log-' + d.GAME_ID)
-    .attr('x', (d, i) => x(i))
-    .attr('y', d => {
-      if (d.DIFF < 0) {
-        return y(0)
-      }
-      return y(d.DIFF)
-    })
-    .attr('height', d => Math.abs(y(d.DIFF) - y(0)))
-    .attr('width', x.bandwidth())
-    .attr('fill', d => {
-      if (d.DIFF < 0) {
-        return COLOR.DARK_GREY
-      }
-      return COLOR.LAKERS_YELLOW
-    })
-    .on('mouseover', highlight)
-    .on('mouseleave', doNotHighlight)
+  // seasonLogs
+  //   .selectAll('rect')
+  //   .data(data)
+  //   .enter()
+  //   .append('rect')
+  //   .attr('class', d => 'season-log-' + d.GAME_ID)
+  //   .attr('x', (d, i) => x(i))
+  //   .attr('y', d => {
+  //     if (d.DIFF < 0) {
+  //       return y(0)
+  //     }
+  //     return y(d.DIFF)
+  //   })
+  //   .transition()
+  //   .duration(1000)
+  //   .attr('width', x.bandwidth())
+  //   .attr('height', d => Math.abs(y(d.DIFF) - y(0)))
+  //   .attr('fill', d => {
+  //     if (d.DIFF < 0) {
+  //       return COLOR.DARK_GREY
+  //     }
+  //     return COLOR.LAKERS_YELLOW
+  //   })
+  //   .on('mouseover', highlight)
+  //   .on('mouseleave', doNotHighlight)
 
   // draw text
   var texts = seasonLogs
