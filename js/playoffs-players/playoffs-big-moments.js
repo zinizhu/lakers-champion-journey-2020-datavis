@@ -3,6 +3,31 @@ var big_moments_margin = { top: 100, bottom: 100, left: 50, right: 50 }
 var big_moments_width = 1300
 var big_moments_height = 5000
 var momentIds = [0, 1, 3, 4, 7, 9, 11, 14, 18, 19, 20]
+
+var all_games_text = [
+  'LAL vs POR \n G1',
+  'LAL vs POR \n G2',
+  'LAL vs POR \n G3',
+  'LAL vs POR \n G4',
+  'LAL vs POR \n G5',
+  'LAL vs HOU \n G1',
+  'LAL vs HOU \n G2',
+  'LAL vs HOU \n G3',
+  'LAL vs HOU \n G4',
+  'LAL vs HOU \n G5',
+  'LAL vs DEN \n G1',
+  'LAL vs DEN \n G2',
+  'LAL vs DEN \n G3',
+  'LAL vs DEN \n G4',
+  'LAL vs DEN \n G5',
+  'LAL vs MIA \n G1',
+  'LAL vs MIA \n G2',
+  'LAL vs MIA \n G3',
+  'LAL vs MIA \n G4',
+  'LAL vs MIA \n G5',
+  'LAL vs MIA \n G6'
+]
+
 var james_moments = [
   {
     id: 0,
@@ -131,35 +156,36 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
     .enter()
     .append('circle')
     .attr('class', (d, i) => {
-      if (momentIds.includes(i)) {
-        return 'big-moments-active-' + i
-      }
-      return 'big-moments'
+      return 'big-moments-' + i
     })
     .attr('cx', 0)
     .attr('cy', (d, i) => big_moments_y_scale(i))
     .attr('r', 12)
     .attr('fill', 'white')
-    .attr('stroke', d => {
-      if (d.WL === 'W') {
-        return COLOR.LAKERS_YELLOW
+    .attr('stroke', (d, i) => {
+      if (i === 20) {
+        return COLOR.RED
       }
-      return COLOR.RED
+      if (momentIds.includes(i)) {
+        return COLOR.LAKERS_PURPLE
+      }
+      return COLOR.LAKERS_YELLOW
     })
     .attr('stroke-width', 5)
 
+  // add legends in the circles
   big_moments_svg
-    .selectAll('james-big-moments-games')
-    .data(james_moments)
+    .selectAll('big-moments-games')
+    .data(all_games_text)
     .enter()
     .append('text')
-    .attr('class', d => 'big-moments-games-' + d.id)
+    .attr('class', (d, i) => 'big-moments-games-' + i)
     .attr('x', 0)
-    .attr('y', d => big_moments_y_scale(d.id) - 15)
+    .attr('y', (d, i) => big_moments_y_scale(i) - 15)
     .attr('fill', COLOR.DARK_GREY)
     .attr('display', 'none')
-    .selectAll('james-big-moments-games-span')
-    .data(d => d.game.split('\n'))
+    .selectAll('big-moments-games-span')
+    .data(d => d.split('\n'))
     .enter()
     .append('tspan')
     .text(d => d)
@@ -168,27 +194,7 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
     .style('text-anchor', 'middle')
     .style('font-size', '12')
 
-  big_moments_svg
-    .selectAll('davis-big-moments-games')
-    .data(davis_moments)
-    .enter()
-    .append('text')
-    .attr('class', d => 'big-moments-games-' + d.id)
-    .attr('x', 0)
-    .attr('y', d => big_moments_y_scale(d.id) - 15)
-    .attr('fill', COLOR.DARK_GREY)
-    .attr('display', 'none')
-    .selectAll('davis-big-moments-games-span')
-    .data(d => d.game.split('\n'))
-    .enter()
-    .append('tspan')
-    .text(d => d)
-    .attr('x', 0)
-    .attr('dy', 15)
-    .style('text-anchor', 'middle')
-    .style('font-size', '12')
-
-  // add james text
+  // add james/davis text
   james_big_moments_g
     .selectAll('james-big-moments-texts')
     .data(james_moments)
@@ -227,27 +233,19 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
 
   var moments_avatars_div = document.getElementsByClassName('moments')
 
-  for (var i = 0, length = momentIds.length; i < length; i++) {
+  for (var i = 0, length = all_games_text.length; i < length; i++) {
     new Waypoint({
-      element: document.getElementsByClassName(
-        'big-moments-active-' + momentIds[i]
-      )[0],
+      element: document.getElementsByClassName('big-moments-' + i)[0],
       handler: function (direction) {
         var className = '.' + this.element.getAttribute('class')
         var splits = this.element.getAttribute('class').split('-')
         var id = splits[splits.length - 1]
-        var textClassName = '.big-moments-texts-' + id
         var gameClassName = '.big-moments-games-' + id
         if (direction === 'down') {
           d3.select(className)
             .transition()
             .attr('r', 50)
             .attr('stroke-width', 10)
-            .duration(500)
-
-          d3.select(textClassName)
-            .transition()
-            .attr('opacity', 1)
             .duration(500)
 
           d3.select(gameClassName)
@@ -259,16 +257,10 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             moments_avatars_div[0].classList.add('moments-fixed')
           }
         } else {
-
           d3.select(className)
             .transition()
             .attr('r', 12)
             .attr('stroke-width', 5)
-            .duration(500)
-
-          d3.select(textClassName)
-            .transition()
-            .attr('opacity', 0.1)
             .duration(500)
 
           d3.select(gameClassName)
@@ -285,25 +277,17 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
     })
 
     new Waypoint({
-      element: document.getElementsByClassName(
-        'big-moments-active-' + momentIds[i]
-      )[0],
+      element: document.getElementsByClassName('big-moments-' + i)[0],
       handler: function (direction) {
         var className = '.' + this.element.getAttribute('class')
         var splits = this.element.getAttribute('class').split('-')
         var id = splits[splits.length - 1]
-        var textClassName = '.big-moments-texts-' + id
         var gameClassName = '.big-moments-games-' + id
         if (direction === 'down' && id != '20') {
           d3.select(className)
             .transition()
             .attr('r', 12)
             .attr('stroke-width', 5)
-            .duration(500)
-
-          d3.select(textClassName)
-            .transition()
-            .attr('opacity', 0.1)
             .duration(500)
 
           d3.select(gameClassName)
@@ -321,11 +305,6 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
             .attr('stroke-width', 10)
             .duration(500)
 
-          d3.select(textClassName)
-            .transition()
-            .attr('opacity', 1)
-            .duration(500)
-
           d3.select(gameClassName)
             .transition()
             .attr('display', 'block')
@@ -333,6 +312,54 @@ d3.csv('./files/lakers_playoffs_game_logs.csv', data => {
           if (id === '19') {
             moments_avatars_div[0].classList.add('moments-fixed')
           }
+        }
+      },
+      offset: '30%'
+    })
+  }
+
+  for (var i = 0, length = momentIds.length; i < length; i++) {
+    new Waypoint({
+      element: document.getElementsByClassName(
+        'big-moments-' + momentIds[i]
+      )[0],
+      handler: function (direction) {
+        var splits = this.element.getAttribute('class').split('-')
+        var id = splits[splits.length - 1]
+        var textClassName = '.big-moments-texts-' + id
+        if (direction === 'down') {
+          d3.select(textClassName)
+            .transition()
+            .attr('opacity', 1)
+            .duration(500)
+        } else {
+          d3.select(textClassName)
+            .transition()
+            .attr('opacity', 0.1)
+            .duration(500)
+        }
+      },
+      offset: '50%'
+    })
+
+    new Waypoint({
+      element: document.getElementsByClassName(
+        'big-moments-' + momentIds[i]
+      )[0],
+      handler: function (direction) {
+        var splits = this.element.getAttribute('class').split('-')
+        var id = splits[splits.length - 1]
+        var textClassName = '.big-moments-texts-' + id
+        if (direction === 'down' && id != '20') {
+          d3.select(textClassName)
+            .transition()
+            .attr('opacity', 0.1)
+            .duration(500)
+        } else {
+          d3.select(textClassName)
+            .transition()
+            .attr('opacity', 1)
+            .duration(500)
         }
       },
       offset: '30%'
