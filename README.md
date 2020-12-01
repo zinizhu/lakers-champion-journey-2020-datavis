@@ -4,7 +4,7 @@
 
 This project is motivated by the Los Angeles Lakers winning their 17th championship in the 2019-20 NBA season. This Lakers team experienced more unprecedented difficulties than ever in this special year, but they were able to put through together and won the championship, which not only brought back this team’s former glory, but also paid the highest tribute to the Lakers’ late celebrity Kobe Bryant. 
 
-The goal of this project is to tell a complete story on the Lakers’ 2019-20 season by analyzing the team’s professional statistics, showing the teams season highlights, and ultimately presenting the results in a web page in the form of scrol- lytelling.
+The goal of this project is to tell a complete story on the Lakers’ 2019-20 season by analyzing the team’s professional statistics, showing the teams season highlights, and ultimately presenting the results in a web page in the form of scrollytelling.
 
 ## Website
 The website is deployed with Github Page: https://zinizhu.github.io/lakers-champion-journey-2020-datavis
