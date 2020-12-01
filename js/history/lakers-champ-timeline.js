@@ -40,6 +40,7 @@ d3.csv('./files/lakers_champ.csv', data => {
         .tickFormat(d3.format('d'))
     )
 
+  // scrolling effects
   new Waypoint({
     element: document.getElementById('lakers-champ-timeline'),
     handler: function (direction) {

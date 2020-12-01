@@ -103,7 +103,6 @@ d3.csv('./files/lakers_players_performance.csv', data => {
       )
     )
   }
-  // console.log(metricsMinValues, metricsMaxValues)
 
   // for each dimension build a linear scale
   var lakers_players_performance_y = {}

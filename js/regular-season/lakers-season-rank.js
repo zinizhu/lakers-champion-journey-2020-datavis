@@ -36,7 +36,6 @@ d3.csv('./files/all_team_performance.csv', data => {
     all_team_PTS.push({ team: row['TEAM_ABBR'], PTS: +team_avg_pts.toFixed(2) })
   })
   all_team_PTS.sort((a, b) => b.PTS - a.PTS)
-  // console.log(all_team_PTS)
 
   // horizontal bar graph
   // y axis
