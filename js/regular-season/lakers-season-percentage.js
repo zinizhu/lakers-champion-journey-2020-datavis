@@ -1,5 +1,5 @@
 // define margin and svg size
-var season_percentage_margin = { top: 30, bottom: 20, left: 30, right: 30 }
+var season_percentage_margin = { top: 30, bottom: 20, left: 50, right: 30 }
 var season_percentage_width = 1000
 var season_percentage_height = 120
 
@@ -52,6 +52,11 @@ d3.csv('./files/lakers_game_logs.csv', data => {
     .scaleLinear()
     .domain([0, 1])
     .range([season_percentage_height, 0])
+
+  seasonPercentage
+    .append('g')
+    .attr('transform', 'translate(' + -10 + ', ' + 0 + ')')
+    .call(d3.axisLeft(y).ticks(4).tickFormat((d) => d * 100 + '%'))
 
   seasonPercentage
     .append('path')
